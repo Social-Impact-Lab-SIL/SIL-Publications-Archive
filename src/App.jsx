@@ -140,7 +140,7 @@ export default function App() {
                   Contact: <a href={`mailto:${pub.contact}`} style={{ color: 'var(--accent)', textDecoration: 'none' }}>{pub.contact}</a>
                 </span>
 
-                {/* Grid Layout for Perfect Column Alignment */}
+                {/* Grid Layout with Locked 3-Column Structure */}
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(140px, auto))', gap: '12px', justifyContent: 'end' }}>
                   
                   {/* Slot 1: View Publication */}
@@ -192,7 +192,7 @@ export default function App() {
                     ) : null}
                   </div>
 
-                  {/* Slot 3: Data Repository */}
+                  {/* Slot 3: Data Repository (or invisible placeholder to hold grid structure) */}
                   <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                     {pub.dataRepoLink ? (
                       <a 
@@ -214,7 +214,19 @@ export default function App() {
                       >
                         Data Repository
                       </a>
-                    ) : null}
+                    ) : (
+                      <div 
+                        aria-hidden="true"
+                        style={{
+                          padding: '8px 14px',
+                          visibility: 'hidden',
+                          pointerEvents: 'none',
+                          width: '100%'
+                        }}
+                      >
+                        Data Repository
+                      </div>
+                    )}
                   </div>
 
                 </div>
