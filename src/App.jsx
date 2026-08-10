@@ -8,10 +8,11 @@ export default function App() {
     {
       title: "Patterns of Specialty Tobacco Retail Locations and Visitor Counts in the United States",
       authors: "Austin Landini, Christopher Lowenstein, and Mike Pesko",
-      status: "Forthcoming in Tobacco Control",
+      status: "Published in Tobacco Control",
       abstract: "An analysis of spatial spillovers, demographic transitions, and retail cluster patterns surrounding specialty tobacco locations across the United States.",
       repoLink: "https://github.com/Social-Impact-Lab-SIL/SpecialtyTobaccoDatabase",
       dataRepoLink: "https://github.com/Social-Impact-Lab-SIL/SIL-Data-Repository/tree/main/Specialty-Tobacco",
+      pubLink: "https://pubmed.ncbi.nlm.nih.gov/", // Replace with exact PubMed link when available
       contact: "clowenstein@missouri.edu"
     }
   ];
@@ -121,7 +122,26 @@ export default function App() {
                   Contact: <a href={`mailto:${pub.contact}`} style={{ color: 'var(--accent)', textDecoration: 'none' }}>{pub.contact}</a>
                 </span>
 
-                <div style={{ display: 'flex', gap: '12px' }}>
+                <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                  {pub.pubLink && (
+                    <a 
+                      href={pub.pubLink} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      style={{
+                        padding: '8px 14px',
+                        background: 'var(--accent)',
+                        color: '#fff',
+                        borderRadius: '6px',
+                        fontSize: '13px',
+                        textDecoration: 'none',
+                        fontWeight: '500'
+                      }}
+                    >
+                      View Publication
+                    </a>
+                  )}
+
                   <a 
                     href={pub.repoLink} 
                     target="_blank" 
@@ -147,11 +167,12 @@ export default function App() {
                       rel="noopener noreferrer" 
                       style={{
                         padding: '8px 14px',
-                        background: 'var(--accent)',
-                        color: '#fff',
+                        background: 'var(--code-bg)',
+                        color: 'var(--text-h)',
                         borderRadius: '6px',
                         fontSize: '13px',
                         textDecoration: 'none',
+                        border: '1px solid var(--border)',
                         fontWeight: '500'
                       }}
                     >
