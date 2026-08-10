@@ -16,7 +16,7 @@ export default function App() {
       contact: "clowenstein@missouri.edu"
     },
     {
-      title: "Recent Additions and Standardization in Tobacco Policy Research",
+      title: "Novel product, familiar challenges: Navigating uncertainty in oral nicotine pouch regulation",
       authors: "Lauren Tonti and Michael F. Pesko",
       status: "Published in Addiction",
       abstract: "An evaluation of policy standards and methodological tracking regarding modern tobacco and substance use controls.",
@@ -25,8 +25,8 @@ export default function App() {
       contact: "ltonti@missouri.edu"
     },
     {
-      title: "Cigar Tax Standardisation and Market Impact Analysis",
-      authors: "Guthrie Scoblic, Rachel Y L Fung, Abigail S. Friedman, and Michael F. Pesko ",
+      title: "Standardising the measurement of cigar tax rates in the USA, 2010–2024",
+      authors: "Guthrie Scoblic, Rachel Y. L. Fung, Abigail S. Friedman, and Michael F. Pesko",
       status: "Published in Tobacco Control",
       abstract: "An empirical examination of cigar tax standardisation frameworks, pricing behavior, and cross-market substitution effects.",
       repoLink: "https://github.com/Social-Impact-Lab-SIL/CigarTaxStandardisation",
@@ -140,63 +140,83 @@ export default function App() {
                   Contact: <a href={`mailto:${pub.contact}`} style={{ color: 'var(--accent)', textDecoration: 'none' }}>{pub.contact}</a>
                 </span>
 
+                {/* Button Container with Fixed Slots for Alignment */}
                 <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-                  {pub.pubLink && (
-                    <a 
-                      href={pub.pubLink} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      style={{
-                        padding: '8px 14px',
-                        background: 'var(--accent)',
-                        color: '#fff',
-                        borderRadius: '6px',
-                        fontSize: '13px',
-                        textDecoration: 'none',
-                        fontWeight: '500'
-                      }}
-                    >
-                      View Publication
-                    </a>
-                  )}
+                  {/* Slot 1: View Publication */}
+                  <div style={{ minWidth: '130px', display: 'flex', justifyContent: 'flex-end' }}>
+                    {pub.pubLink ? (
+                      <a 
+                        href={pub.pubLink} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        style={{
+                          padding: '8px 14px',
+                          background: 'var(--accent)',
+                          color: '#fff',
+                          borderRadius: '6px',
+                          fontSize: '13px',
+                          textDecoration: 'none',
+                          fontWeight: '500',
+                          textAlign: 'center',
+                          width: '100%'
+                        }}
+                      >
+                        View Publication
+                      </a>
+                    ) : null}
+                  </div>
 
-                  <a 
-                    href={pub.repoLink} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    style={{
-                      padding: '8px 14px',
-                      background: 'var(--code-bg)',
-                      color: 'var(--text-h)',
-                      borderRadius: '6px',
-                      fontSize: '13px',
-                      textDecoration: 'none',
-                      border: '1px solid var(--border)',
-                      fontWeight: '500'
-                    }}
-                  >
-                    GitHub Repository
-                  </a>
-                  
-                  {pub.dataRepoLink && (
-                    <a 
-                      href={pub.dataRepoLink} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      style={{
-                        padding: '8px 14px',
-                        background: 'var(--code-bg)',
-                        color: 'var(--text-h)',
-                        borderRadius: '6px',
-                        fontSize: '13px',
-                        textDecoration: 'none',
-                        border: '1px solid var(--border)',
-                        fontWeight: '500'
-                      }}
-                    >
-                      Data Repository
-                    </a>
-                  )}
+                  {/* Slot 2: GitHub Repository */}
+                  <div style={{ minWidth: '130px', display: 'flex', justifyContent: 'flex-end' }}>
+                    {pub.repoLink ? (
+                      <a 
+                        href={pub.repoLink} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        style={{
+                          padding: '8px 14px',
+                          background: 'var(--code-bg)',
+                          color: 'var(--text-h)',
+                          borderRadius: '6px',
+                          fontSize: '13px',
+                          textDecoration: 'none',
+                          border: '1px solid var(--border)',
+                          fontWeight: '500',
+                          textAlign: 'center',
+                          width: '100%'
+                        }}
+                      >
+                        GitHub Repository
+                      </a>
+                    ) : null}
+                  </div>
+
+                  {/* Slot 3: Data Repository */}
+                  <div style={{ minWidth: '130px', display: 'flex', justifyContent: 'flex-end' }}>
+                    {pub.dataRepoLink ? (
+                      <a 
+                        href={pub.dataRepoLink} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        style={{
+                          padding: '8px 14px',
+                          background: 'var(--code-bg)',
+                          color: 'var(--text-h)',
+                          borderRadius: '6px',
+                          fontSize: '13px',
+                          textDecoration: 'none',
+                          border: '1px solid var(--border)',
+                          fontWeight: '500',
+                          textAlign: 'center',
+                          width: '100%'
+                        }}
+                      >
+                        Data Repository
+                      </a>
+                    ) : (
+                      <div style={{ visibility: 'hidden', height: '0px', width: '130px' }} aria-hidden="true" />
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
