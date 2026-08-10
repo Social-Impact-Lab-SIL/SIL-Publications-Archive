@@ -36,15 +36,50 @@ export default function App() {
   ];
 
   const filteredPubs = publications.filter(pub => {
-    const matchesSearch = 
+    const matchesSearch =
       pub.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       pub.authors.toLowerCase().includes(searchTerm.toLowerCase());
-      
-    const matchesStatus = 
+
+    const matchesStatus =
       statusFilter === 'All' || pub.status.toLowerCase().includes(statusFilter.toLowerCase());
 
     return matchesSearch && matchesStatus;
   });
+
+  // Fixed slot order: Publication (col 1), GitHub Repo (col 2), Data Repo (col 3).
+  // Every card always renders all three slots so the buttons line up across
+  // cards. When a link is missing, the slot renders an invisible placeholder
+  // instead of collapsing, which is what was causing the misalignment.
+  const buttonSlots = [
+    { key: 'pubLink', label: 'Publication', variant: 'primary' },
+    { key: 'repoLink', label: 'GitHub Repo', variant: 'secondary' },
+    { key: 'dataRepoLink', label: 'Data Repo', variant: 'secondary' }
+  ];
+
+  const buttonBaseStyle = {
+    padding: '8px 10px',
+    borderRadius: '6px',
+    fontSize: '12px',
+    textDecoration: 'none',
+    fontWeight: '500',
+    textAlign: 'center',
+    width: '100%',
+    boxSizing: 'border-box',
+    display: 'block'
+  };
+
+  const primaryStyle = {
+    ...buttonBaseStyle,
+    background: 'var(--accent)',
+    color: '#fff'
+  };
+
+  const secondaryStyle = {
+    ...buttonBaseStyle,
+    background: 'var(--code-bg)',
+    color: 'var(--text-h)',
+    border: '1px solid var(--border)'
+  };
 
   return (
     <div style={{ padding: '40px 24px', textAlign: 'left', width: '100%', boxSizing: 'border-box' }}>
@@ -58,9 +93,9 @@ export default function App() {
 
       {/* Search and Filter Controls */}
       <div style={{ display: 'flex', gap: '16px', marginBottom: '32px', flexWrap: 'wrap' }}>
-        <input 
-          type="text" 
-          placeholder="Search by title or author..." 
+        <input
+          type="text"
+          placeholder="Search by title or author..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           style={{
@@ -75,7 +110,7 @@ export default function App() {
             outline: 'none'
           }}
         />
-        <select 
+        <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
           style={{
@@ -98,8 +133,8 @@ export default function App() {
       <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
         {filteredPubs.length > 0 ? (
           filteredPubs.map((pub, index) => (
-            <div 
-              key={index} 
+            <div
+              key={index}
               style={{
                 background: 'var(--bg)',
                 padding: '24px',
@@ -109,11 +144,11 @@ export default function App() {
               }}
             >
               <h2>{pub.title}</h2>
-              
+
               <p style={{ fontSize: '15px', marginBottom: '8px', color: 'var(--text-h)' }}>
                 <strong>Authors:</strong> {pub.authors}
               </p>
-              
+
               <p style={{ fontSize: '14px', marginBottom: '12px' }}>
                 <strong>Status:</strong>{' '}
                 <span style={{
@@ -135,115 +170,59 @@ export default function App() {
                 {pub.abstract}
               </p>
 
-              {/* Strict Two-Column Grid for Card Footer Layout */}
-              <div style={{ 
-                display: 'grid', 
-                gridTemplateColumns: '1fr auto', 
-                alignItems: 'center', 
-                gap: '16px', 
-                borderTop: '1px solid var(--border)', 
-                paddingTop: '16px',
-                flexWrap: 'wrap'
+              {/* Footer: contact on the left, button grid pinned to a fixed
+                  width on the right so it starts at the same x-position on
+                  every card, regardless of contact text length. */}
+              <div style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: '16px',
+                borderTop: '1px solid var(--border)',
+                paddingTop: '16px'
               }}>
-                
+
                 {/* Left Side: Contact Information */}
                 <span style={{ fontSize: '14px', color: 'var(--text)' }}>
                   Contact: <a href={`mailto:${pub.contact}`} style={{ color: 'var(--accent)', textDecoration: 'none' }}>{pub.contact}</a>
                 </span>
 
-                {/* Right Side: Strictly Locked 3-Column Button Grid Container */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', width: '480px', maxWidth: '100%' }}>
-                  
-                  {/* Slot 1: View Publication */}
-                  <div style={{ display: 'flex' }}>
-                    {pub.pubLink ? (
-                      <a 
-                        href={pub.pubLink} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        style={{
-                          padding: '8px 10px',
-                          background: 'var(--accent)',
-                          color: '#fff',
-                          borderRadius: '6px',
-                          fontSize: '12px',
-                          textDecoration: 'none',
-                          fontWeight: '500',
-                          textAlign: 'center',
-                          width: '100%',
-                          boxSizing: 'border-box'
-                        }}
-                      >
-                        Publication
-                      </a>
-                    ) : null}
-                  </div>
-
-                  {/* Slot 2: GitHub Repository */}
-                  <div style={{ display: 'flex' }}>
-                    {pub.repoLink ? (
-                      <a 
-                        href={pub.repoLink} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        style={{
-                          padding: '8px 10px',
-                          background: 'var(--code-bg)',
-                          color: 'var(--text-h)',
-                          borderRadius: '6px',
-                          fontSize: '12px',
-                          textDecoration: 'none',
-                          border: '1px solid var(--border)',
-                          fontWeight: '500',
-                          textAlign: 'center',
-                          width: '100%',
-                          boxSizing: 'border-box'
-                        }}
-                      >
-                        GitHub Repo
-                      </a>
-                    ) : null}
-                  </div>
-
-                  {/* Slot 3: Data Repository */}
-                  <div style={{ display: 'flex' }}>
-                    {pub.dataRepoLink ? (
-                      <a 
-                        href={pub.dataRepoLink} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        style={{
-                          padding: '8px 10px',
-                          background: 'var(--code-bg)',
-                          color: 'var(--text-h)',
-                          borderRadius: '6px',
-                          fontSize: '12px',
-                          textDecoration: 'none',
-                          border: '1px solid var(--border)',
-                          fontWeight: '500',
-                          textAlign: 'center',
-                          width: '100%',
-                          boxSizing: 'border-box'
-                        }}
-                      >
-                        Data Repo
-                      </a>
-                    ) : (
-                      <div 
+                {/* Right Side: 3 fixed-width slots, always in the same order.
+                    A missing link renders an invisible placeholder (same
+                    size, no pointer events) rather than nothing, so buttons
+                    in slots 1 and 2 always land in the same spot from card
+                    to card. */}
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(3, minmax(110px, 150px))',
+                  gap: '10px'
+                }}>
+                  {buttonSlots.map(slot => {
+                    const url = pub[slot.key];
+                    if (url) {
+                      return (
+                        <a
+                          key={slot.key}
+                          href={url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={slot.variant === 'primary' ? primaryStyle : secondaryStyle}
+                        >
+                          {slot.label}
+                        </a>
+                      );
+                    }
+                    return (
+                      <div
+                        key={slot.key}
                         aria-hidden="true"
-                        style={{
-                          padding: '8px 10px',
-                          visibility: 'hidden',
-                          pointerEvents: 'none',
-                          width: '100%',
-                          boxSizing: 'border-box'
-                        }}
+                        style={{ ...buttonBaseStyle, visibility: 'hidden', pointerEvents: 'none' }}
                       >
-                        Data Repo
+                        {slot.label}
                       </div>
-                    )}
-                  </div>
-
+                    );
+                  })}
                 </div>
               </div>
             </div>
