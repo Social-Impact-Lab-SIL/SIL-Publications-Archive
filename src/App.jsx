@@ -11,7 +11,7 @@ export default function App() {
       status: "Forthcoming in Tobacco Control",
       abstract: "An analysis of spatial spillovers, demographic transitions, and retail cluster patterns surrounding specialty tobacco locations across the United States.",
       repoLink: "https://github.com/Social-Impact-Lab-SIL/SpecialtyTobaccoDatabase",
-      dashboardLink: "https://social-impact-lab-sil.github.io/SIL-Publication-Dashboard/",
+      dataRepoLink: "https://github.com/Social-Impact-Lab-SIL/SIL-Data-Repository/tree/main/Specialty-Tobacco",
       contact: "clowenstein@missouri.edu"
     }
   ];
@@ -140,9 +140,9 @@ export default function App() {
                     GitHub Repository
                   </a>
                   
-                  {pub.dashboardLink && (
+                  {pub.dataRepoLink && (
                     <a 
-                      href={pub.dashboardLink} 
+                      href={pub.dataRepoLink} 
                       target="_blank" 
                       rel="noopener noreferrer" 
                       style={{
@@ -155,7 +155,7 @@ export default function App() {
                         fontWeight: '500'
                       }}
                     >
-                      View Dashboard
+                      Data Repository
                     </a>
                   )}
                 </div>
