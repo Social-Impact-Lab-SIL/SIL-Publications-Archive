@@ -3,7 +3,7 @@ import { useState } from 'react';
 export default function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('All');
-  const [sortBy, setSortBy] = useState('default'); // 'default', 'title', 'author'
+  const [sortBy, setSortBy] = useState('default'); // 'default', 'date', 'title', 'author'
 
   const publications = [
     {
@@ -53,7 +53,9 @@ export default function App() {
 
   // Sort publications based on current sort selection
   const sortedPubs = [...filteredPubs].sort((a, b) => {
-    if (sortBy === 'title') {
+    if (sortBy === 'date') {
+      return new Date(b.date) - new Date(a.date); // Most recent first
+    } else if (sortBy === 'title') {
       return a.title.localeCompare(b.title);
     } else if (sortBy === 'author') {
       // Extract last name of the first author for sorting
@@ -158,7 +160,8 @@ export default function App() {
             outline: 'none'
           }}
         >
-          <option value="default">Sort by: Default</option>
+          <option value="default">Sort by:</option>
+          <option value="date">Sort by: Date</option>
           <option value="title">Sort by: Title</option>
           <option value="author">Sort by: First Author</option>
         </select>
