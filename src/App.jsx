@@ -135,96 +135,100 @@ export default function App() {
                 {pub.abstract}
               </p>
 
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px', borderTop: '1px solid var(--border)', paddingTop: '16px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', borderTop: '1px solid var(--border)', paddingTop: '16px' }}>
                 <span style={{ fontSize: '14px', color: 'var(--text)' }}>
                   Contact: <a href={`mailto:${pub.contact}`} style={{ color: 'var(--accent)', textDecoration: 'none' }}>{pub.contact}</a>
                 </span>
 
-                {/* Grid Layout with Locked 3-Column Structure */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(140px, auto))', gap: '12px', justifyContent: 'end' }}>
+                {/* Strictly Locked 3-Column Grid Container */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', width: '100%', maxWidth: '480px' }}>
                   
                   {/* Slot 1: View Publication */}
-                  <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                  <div style={{ display: 'flex' }}>
                     {pub.pubLink ? (
                       <a 
                         href={pub.pubLink} 
                         target="_blank" 
                         rel="noopener noreferrer" 
                         style={{
-                          padding: '8px 14px',
+                          padding: '8px 10px',
                           background: 'var(--accent)',
                           color: '#fff',
                           borderRadius: '6px',
-                          fontSize: '13px',
+                          fontSize: '12px',
                           textDecoration: 'none',
                           fontWeight: '500',
                           textAlign: 'center',
-                          width: '100%'
+                          width: '100%',
+                          boxSizing: 'border-box'
                         }}
                       >
-                        View Publication
+                        Publication
                       </a>
                     ) : null}
                   </div>
 
                   {/* Slot 2: GitHub Repository */}
-                  <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                  <div style={{ display: 'flex' }}>
                     {pub.repoLink ? (
                       <a 
                         href={pub.repoLink} 
                         target="_blank" 
                         rel="noopener noreferrer" 
                         style={{
-                          padding: '8px 14px',
+                          padding: '8px 10px',
                           background: 'var(--code-bg)',
                           color: 'var(--text-h)',
                           borderRadius: '6px',
-                          fontSize: '13px',
+                          fontSize: '12px',
                           textDecoration: 'none',
                           border: '1px solid var(--border)',
                           fontWeight: '500',
                           textAlign: 'center',
-                          width: '100%'
+                          width: '100%',
+                          boxSizing: 'border-box'
                         }}
                       >
-                        GitHub Repository
+                        GitHub Repo
                       </a>
                     ) : null}
                   </div>
 
-                  {/* Slot 3: Data Repository (or invisible placeholder to hold grid structure) */}
-                  <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                  {/* Slot 3: Data Repository */}
+                  <div style={{ display: 'flex' }}>
                     {pub.dataRepoLink ? (
                       <a 
                         href={pub.dataRepoLink} 
                         target="_blank" 
                         rel="noopener noreferrer" 
                         style={{
-                          padding: '8px 14px',
+                          padding: '8px 10px',
                           background: 'var(--code-bg)',
                           color: 'var(--text-h)',
                           borderRadius: '6px',
-                          fontSize: '13px',
+                          fontSize: '12px',
                           textDecoration: 'none',
                           border: '1px solid var(--border)',
                           fontWeight: '500',
                           textAlign: 'center',
-                          width: '100%'
+                          width: '100%',
+                          boxSizing: 'border-box'
                         }}
                       >
-                        Data Repository
+                        Data Repo
                       </a>
                     ) : (
                       <div 
                         aria-hidden="true"
                         style={{
-                          padding: '8px 14px',
+                          padding: '8px 10px',
                           visibility: 'hidden',
                           pointerEvents: 'none',
-                          width: '100%'
+                          width: '100%',
+                          boxSizing: 'border-box'
                         }}
                       >
-                        Data Repository
+                        Data Repo
                       </div>
                     )}
                   </div>
