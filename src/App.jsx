@@ -26,7 +26,7 @@ export default function App() {
     },
     {
       title: "Standardising the measurement of cigar tax rates in the USA, 2010–2024",
-      authors: "Guthrie Scoblic, Rachel Y. L. Fung, Abigail S. Friedman, and Michael F. Pesko",
+      authors: "Guthrie Scoblic, Rachel Y L Fung, Abigail S Friedman, and Michael F. Pesko",
       status: "Published in Tobacco Control",
       abstract: "An empirical examination of cigar tax standardisation frameworks, pricing behavior, and cross-market substitution effects.",
       repoLink: "https://github.com/Social-Impact-Lab-SIL/CigarTaxStandardisation",
@@ -140,10 +140,11 @@ export default function App() {
                   Contact: <a href={`mailto:${pub.contact}`} style={{ color: 'var(--accent)', textDecoration: 'none' }}>{pub.contact}</a>
                 </span>
 
-                {/* Button Container with Fixed Slots for Alignment */}
-                <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                {/* Grid Layout for Perfect Column Alignment */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(140px, auto))', gap: '12px', justifyContent: 'end' }}>
+                  
                   {/* Slot 1: View Publication */}
-                  <div style={{ minWidth: '130px', display: 'flex', justifyContent: 'flex-end' }}>
+                  <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                     {pub.pubLink ? (
                       <a 
                         href={pub.pubLink} 
@@ -167,7 +168,7 @@ export default function App() {
                   </div>
 
                   {/* Slot 2: GitHub Repository */}
-                  <div style={{ minWidth: '130px', display: 'flex', justifyContent: 'flex-end' }}>
+                  <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                     {pub.repoLink ? (
                       <a 
                         href={pub.repoLink} 
@@ -192,7 +193,7 @@ export default function App() {
                   </div>
 
                   {/* Slot 3: Data Repository */}
-                  <div style={{ minWidth: '130px', display: 'flex', justifyContent: 'flex-end' }}>
+                  <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                     {pub.dataRepoLink ? (
                       <a 
                         href={pub.dataRepoLink} 
@@ -213,10 +214,9 @@ export default function App() {
                       >
                         Data Repository
                       </a>
-                    ) : (
-                      <div style={{ visibility: 'hidden', height: '0px', width: '130px' }} aria-hidden="true" />
-                    )}
+                    ) : null}
                   </div>
+
                 </div>
               </div>
             </div>
