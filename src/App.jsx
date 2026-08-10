@@ -135,13 +135,24 @@ export default function App() {
                 {pub.abstract}
               </p>
 
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', borderTop: '1px solid var(--border)', paddingTop: '16px' }}>
+              {/* Strict Two-Column Grid for Card Footer Layout */}
+              <div style={{ 
+                display: 'grid', 
+                gridTemplateColumns: '1fr auto', 
+                alignItems: 'center', 
+                gap: '16px', 
+                borderTop: '1px solid var(--border)', 
+                paddingTop: '16px',
+                flexWrap: 'wrap'
+              }}>
+                
+                {/* Left Side: Contact Information */}
                 <span style={{ fontSize: '14px', color: 'var(--text)' }}>
                   Contact: <a href={`mailto:${pub.contact}`} style={{ color: 'var(--accent)', textDecoration: 'none' }}>{pub.contact}</a>
                 </span>
 
-                {/* Strictly Locked 3-Column Grid Container */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', width: '100%', maxWidth: '480px' }}>
+                {/* Right Side: Strictly Locked 3-Column Button Grid Container */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', width: '480px', maxWidth: '100%' }}>
                   
                   {/* Slot 1: View Publication */}
                   <div style={{ display: 'flex' }}>
