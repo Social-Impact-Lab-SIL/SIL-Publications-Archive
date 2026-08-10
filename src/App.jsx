@@ -3,12 +3,14 @@ import { useState } from 'react';
 export default function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('All');
+  const [sortBy, setSortBy] = useState('default'); // 'default', 'title', 'author'
 
   const publications = [
     {
       title: "Patterns of Specialty Tobacco Retail Locations and Visitor Counts in the United States",
       authors: "Austin Landini, Christopher Lowenstein, and Michael F. Pesko",
       status: "Published in Tobacco Control",
+      date: "08/03/2026",
       abstract: "An analysis of spatial spillovers, demographic transitions, and retail cluster patterns surrounding specialty tobacco locations across the United States.",
       repoLink: "https://github.com/Social-Impact-Lab-SIL/SpecialtyTobaccoDatabase",
       dataRepoLink: "https://github.com/Social-Impact-Lab-SIL/SIL-Data-Repository/tree/main/Specialty-Tobacco",
@@ -19,6 +21,7 @@ export default function App() {
       title: "Novel product, familiar challenges: Navigating uncertainty in oral nicotine pouch regulation",
       authors: "Lauren Tonti and Michael F. Pesko",
       status: "Published in Addiction",
+      date: "07/01/2026",
       abstract: "An evaluation of policy standards and methodological tracking regarding modern tobacco and substance use controls.",
       repoLink: "https://github.com/Social-Impact-Lab-SIL/SIL-Data-Repository",
       pubLink: "https://doi.org/10.1111/add.70531",
@@ -28,6 +31,7 @@ export default function App() {
       title: "Standardising the measurement of cigar tax rates in the USA, 2010–2024",
       authors: "Guthrie Scoblic, Rachel Y L Fung, Abigail S Friedman, and Michael F. Pesko",
       status: "Published in Tobacco Control",
+      date: "07/08/2026",
       abstract: "An empirical examination of cigar tax standardisation frameworks, pricing behavior, and cross-market substitution effects.",
       repoLink: "https://github.com/Social-Impact-Lab-SIL/CigarTaxStandardisation",
       pubLink: "https://doi.org/10.1136/tc-2026-060077",
@@ -35,6 +39,7 @@ export default function App() {
     }
   ];
 
+  // Filter publications based on search term and status
   const filteredPubs = publications.filter(pub => {
     const matchesSearch =
       pub.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -46,10 +51,23 @@ export default function App() {
     return matchesSearch && matchesStatus;
   });
 
+  // Sort publications based on current sort selection
+  const sortedPubs = [...filteredPubs].sort((a, b) => {
+    if (sortBy === 'title') {
+      return a.title.localeCompare(b.title);
+    } else if (sortBy === 'author') {
+      // Extract last name of the first author for sorting
+      const getFirstAuthorLastName = (authorStr) => {
+        const firstAuthor = authorStr.split(',')[0].trim();
+        const parts = firstAuthor.split(' ');
+        return parts[parts.length - 1];
+      };
+      return getFirstAuthorLastName(a.authors).localeCompare(getFirstAuthorLastName(b.authors));
+    }
+    return 0; // Default array order
+  });
+
   // Fixed slot order: Publication (col 1), GitHub Repo (col 2), Data Repo (col 3).
-  // Every card always renders all three slots so the buttons line up across
-  // cards. When a link is missing, the slot renders an invisible placeholder
-  // instead of collapsing, which is what was causing the misalignment.
   const buttonSlots = [
     { key: 'pubLink', label: 'Publication', variant: 'primary' },
     { key: 'repoLink', label: 'GitHub Repo', variant: 'secondary' },
@@ -91,7 +109,7 @@ export default function App() {
         </p>
       </div>
 
-      {/* Search and Filter Controls */}
+      {/* Search, Filter, and Sort Controls */}
       <div style={{ display: 'flex', gap: '16px', marginBottom: '32px', flexWrap: 'wrap' }}>
         <input
           type="text"
@@ -127,12 +145,29 @@ export default function App() {
           <option value="Forthcoming">Forthcoming / Published</option>
           <option value="Under Review">Under Review</option>
         </select>
+        <select
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value)}
+          style={{
+            padding: '12px 16px',
+            border: '1px solid var(--border)',
+            borderRadius: '6px',
+            background: 'var(--bg)',
+            color: 'var(--text-h)',
+            fontSize: '15px',
+            outline: 'none'
+          }}
+        >
+          <option value="default">Sort by: Default</option>
+          <option value="title">Sort by: Title</option>
+          <option value="author">Sort by: First Author</option>
+        </select>
       </div>
 
       {/* Publications List */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-        {filteredPubs.length > 0 ? (
-          filteredPubs.map((pub, index) => (
+        {sortedPubs.length > 0 ? (
+          sortedPubs.map((pub, index) => (
             <div
               key={index}
               style={{
@@ -149,30 +184,35 @@ export default function App() {
                 <strong>Authors:</strong> {pub.authors}
               </p>
 
-              <p style={{ fontSize: '14px', marginBottom: '12px' }}>
-                <strong>Status:</strong>{' '}
-                <span style={{
-                  display: 'inline-block',
-                  padding: '2px 8px',
-                  background: 'var(--accent-bg)',
-                  color: 'var(--accent)',
-                  borderRadius: '4px',
-                  border: '1px solid var(--accent-border)',
-                  fontSize: '13px',
-                  fontWeight: '500',
-                  marginLeft: '4px'
-                }}>
-                  {pub.status}
-                </span>
-              </p>
+              <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginBottom: '12px', flexWrap: 'wrap' }}>
+                <p style={{ fontSize: '14px', margin: 0 }}>
+                  <strong>Status:</strong>{' '}
+                  <span style={{
+                    display: 'inline-block',
+                    padding: '2px 8px',
+                    background: 'var(--accent-bg)',
+                    color: 'var(--accent)',
+                    borderRadius: '4px',
+                    border: '1px solid var(--accent-border)',
+                    fontSize: '13px',
+                    fontWeight: '500',
+                    marginLeft: '4px'
+                  }}>
+                    {pub.status}
+                  </span>
+                </p>
+                {pub.date && (
+                  <p style={{ fontSize: '14px', margin: 0, color: 'var(--text)' }}>
+                    <strong>Date:</strong> {pub.date}
+                  </p>
+                )}
+              </div>
 
               <p style={{ fontSize: '15px', marginBottom: '16px', background: 'var(--code-bg)', padding: '12px', borderRadius: '6px' }}>
                 {pub.abstract}
               </p>
 
-              {/* Footer: contact on the left, button grid pinned to a fixed
-                  width on the right so it starts at the same x-position on
-                  every card, regardless of contact text length. */}
+              {/* Footer: contact on the left, button grid pinned on the right */}
               <div style={{
                 display: 'flex',
                 flexWrap: 'wrap',
@@ -188,11 +228,7 @@ export default function App() {
                   Contact: <a href={`mailto:${pub.contact}`} style={{ color: 'var(--accent)', textDecoration: 'none' }}>{pub.contact}</a>
                 </span>
 
-                {/* Right Side: 3 fixed-width slots, always in the same order.
-                    A missing link renders an invisible placeholder (same
-                    size, no pointer events) rather than nothing, so buttons
-                    in slots 1 and 2 always land in the same spot from card
-                    to card. */}
+                {/* Right Side: 3 fixed-width slots */}
                 <div style={{
                   display: 'grid',
                   gridTemplateColumns: 'repeat(3, minmax(110px, 150px))',
