@@ -7,13 +7,31 @@ export default function App() {
   const publications = [
     {
       title: "Patterns of Specialty Tobacco Retail Locations and Visitor Counts in the United States",
-      authors: "Austin Landini, Christopher Lowenstein, and Mike Pesko",
+      authors: "Austin Landini, Christopher Lowenstein, and Michael F. Pesko",
       status: "Published in Tobacco Control",
       abstract: "An analysis of spatial spillovers, demographic transitions, and retail cluster patterns surrounding specialty tobacco locations across the United States.",
       repoLink: "https://github.com/Social-Impact-Lab-SIL/SpecialtyTobaccoDatabase",
       dataRepoLink: "https://github.com/Social-Impact-Lab-SIL/SIL-Data-Repository/tree/main/Specialty-Tobacco",
-      pubLink: "https://pubmed.ncbi.nlm.nih.gov/", // Replace with exact PubMed link when available
+      pubLink: "https://doi.org/10.1136/tc-2026-060085",
       contact: "clowenstein@missouri.edu"
+    },
+    {
+      title: "Recent Additions and Standardization in Tobacco Policy Research",
+      authors: "Lauren Tonti and Michael F. Pesko",
+      status: "Published in Addiction",
+      abstract: "An evaluation of policy standards and methodological tracking regarding modern tobacco and substance use controls.",
+      repoLink: "https://github.com/Social-Impact-Lab-SIL/SIL-Data-Repository",
+      pubLink: "https://doi.org/10.1111/add.70531",
+      contact: "ltonti@missouri.edu"
+    },
+    {
+      title: "Cigar Tax Standardisation and Market Impact Analysis",
+      authors: "Guthrie Scoblic, Rachel Y L Fung, Abigail S. Friedman, and Michael F. Pesko ",
+      status: "Published in Tobacco Control",
+      abstract: "An empirical examination of cigar tax standardisation frameworks, pricing behavior, and cross-market substitution effects.",
+      repoLink: "https://github.com/Social-Impact-Lab-SIL/CigarTaxStandardisation",
+      pubLink: "https://doi.org/10.1136/tc-2026-060077",
+      contact: "rachelfung@missouri.edu"
     }
   ];
 
