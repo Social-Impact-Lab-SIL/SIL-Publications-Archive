@@ -15,7 +15,7 @@ export default function App() {
       repoLink: "https://github.com/Social-Impact-Lab-SIL/SpecialtyTobaccoDatabase",
       dataRepoLink: "https://github.com/Social-Impact-Lab-SIL/SIL-Data-Repository/tree/main/Specialty-Tobacco",
       pubLink: "https://doi.org/10.1136/tc-2026-060085",
-      pubMedLink: "https://pubmed.ncbi.nlm.nih.gov/42425894/", // Placeholder/Associated PMID link structure
+      pubMedLink: "https://pubmed.ncbi.nlm.nih.gov/42425894/",
       contact: "clowenstein@missouri.edu"
     },
     {
@@ -24,7 +24,8 @@ export default function App() {
       status: "Published in Addiction",
       date: "07/01/2026",
       abstract: "An evaluation of policy standards and methodological tracking regarding modern tobacco and substance use controls.",
-      // repoLink removed as requested
+      // repoLink omitted
+      // dataRepoLink omitted
       pubLink: "https://doi.org/10.1111/add.70531",
       pubMedLink: "https://pubmed.ncbi.nlm.nih.gov/", 
       contact: "ltonti@missouri.edu"
@@ -35,8 +36,8 @@ export default function App() {
       status: "Published in Tobacco Control",
       date: "07/08/2026",
       abstract: "An empirical examination of cigar tax standardisation frameworks, pricing behavior, and cross-market substitution effects.",
-      dataRepoLink: "https://github.com/Social-Impact-Lab-SIL/SIL-Data-Repository",
       repoLink: "https://github.com/Social-Impact-Lab-SIL/CigarTaxStandardisation",
+      dataRepoLink: "https://github.com/Social-Impact-Lab-SIL/SIL-Data-Repository",
       pubLink: "https://doi.org/10.1136/tc-2026-060077",
       pubMedLink: "https://pubmed.ncbi.nlm.nih.gov/42425894/",
       contact: "rachelfung@missouri.edu"
@@ -86,8 +87,8 @@ export default function App() {
         { key: 'pubMedLink', label: 'PubMed', variant: 'primary' }
       ]
     },
-    { key: 'repoLink', label: 'GitHub Repo', variant: 'secondary' },
-    { key: 'dataRepoLink', label: 'Data Repo', variant: 'secondary' }
+    { key: 'repoLink', label: 'GitHub Repo', variant: 'secondary', checkKey: 'repoLink' },
+    { key: 'dataRepoLink', label: 'Data Repo', variant: 'secondary', checkKey: 'dataRepoLink' }
   ];
 
   const buttonBaseStyle = {
@@ -284,7 +285,8 @@ export default function App() {
                         </div>
                       );
                     } else {
-                      const url = pub[slot.key];
+                      const targetKey = slot.checkKey || slot.key;
+                      const url = pub[targetKey];
                       if (url) {
                         return (
                           <a
