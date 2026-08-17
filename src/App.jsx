@@ -13,7 +13,7 @@ export default function App() {
       date: "08/03/2026",
       abstract: "An analysis of spatial spillovers, demographic transitions, and retail cluster patterns surrounding specialty tobacco locations across the United States.",
       repoLink: "https://github.com/Social-Impact-Lab-SIL/SpecialtyTobaccoDatabase",
-      dataRepoLink: "https://github.com/Social-Impact-Lab-SIL/SIL-Data-Repository/tree/main/Specialty-Tobacco",
+      dataRepoLink: "https://social-impact-lab-sil.github.io/SIL-Data-Repository/Specialty-Tobacco/",
       pubLink: "https://doi.org/10.1136/tc-2026-060085",
       pubMedLink: "https://pubmed.ncbi.nlm.nih.gov/42425894/",
       contact: "clowenstein@missouri.edu"
@@ -37,7 +37,7 @@ export default function App() {
       date: "07/08/2026",
       abstract: "An empirical examination of cigar tax standardisation frameworks, pricing behavior, and cross-market substitution effects.",
       repoLink: "https://github.com/Social-Impact-Lab-SIL/CigarTaxStandardisation",
-      dataRepoLink: "https://github.com/Social-Impact-Lab-SIL/SIL-Data-Repository",
+      dataRepoLink: "https://social-impact-lab-sil.github.io/SIL-Data-Repository/Population-Exposure-Standardized-Tobacco/",
       pubLink: "https://doi.org/10.1136/tc-2026-060077",
       pubMedLink: "https://pubmed.ncbi.nlm.nih.gov/42425894/",
       contact: "rachelfung@missouri.edu"
