@@ -25,7 +25,6 @@ export default function App() {
       date: "07/01/2026",
       abstract: "An evaluation of policy standards and methodological tracking regarding modern tobacco and substance use controls.",
       // repoLink removed as requested
-      dataRepoLink: "https://github.com/Social-Impact-Lab-SIL/SIL-Data-Repository",
       pubLink: "https://doi.org/10.1111/add.70531",
       pubMedLink: "https://pubmed.ncbi.nlm.nih.gov/", 
       contact: "ltonti@missouri.edu"
@@ -36,6 +35,7 @@ export default function App() {
       status: "Published in Tobacco Control",
       date: "07/08/2026",
       abstract: "An empirical examination of cigar tax standardisation frameworks, pricing behavior, and cross-market substitution effects.",
+      dataRepoLink: "https://github.com/Social-Impact-Lab-SIL/SIL-Data-Repository",
       repoLink: "https://github.com/Social-Impact-Lab-SIL/CigarTaxStandardisation",
       pubLink: "https://doi.org/10.1136/tc-2026-060077",
       pubMedLink: "https://pubmed.ncbi.nlm.nih.gov/42425894/",
