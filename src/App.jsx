@@ -15,6 +15,7 @@ export default function App() {
       repoLink: "https://github.com/Social-Impact-Lab-SIL/SpecialtyTobaccoDatabase",
       dataRepoLink: "https://github.com/Social-Impact-Lab-SIL/SIL-Data-Repository/tree/main/Specialty-Tobacco",
       pubLink: "https://doi.org/10.1136/tc-2026-060085",
+      pubMedLink: "https://pubmed.ncbi.nlm.nih.gov/42425894/", // Placeholder/Associated PMID link structure
       contact: "clowenstein@missouri.edu"
     },
     {
@@ -23,8 +24,10 @@ export default function App() {
       status: "Published in Addiction",
       date: "07/01/2026",
       abstract: "An evaluation of policy standards and methodological tracking regarding modern tobacco and substance use controls.",
-      repoLink: "https://github.com/Social-Impact-Lab-SIL/SIL-Data-Repository",
+      // repoLink removed as requested
+      dataRepoLink: "https://github.com/Social-Impact-Lab-SIL/SIL-Data-Repository",
       pubLink: "https://doi.org/10.1111/add.70531",
+      pubMedLink: "https://pubmed.ncbi.nlm.nih.gov/", 
       contact: "ltonti@missouri.edu"
     },
     {
@@ -35,6 +38,7 @@ export default function App() {
       abstract: "An empirical examination of cigar tax standardisation frameworks, pricing behavior, and cross-market substitution effects.",
       repoLink: "https://github.com/Social-Impact-Lab-SIL/CigarTaxStandardisation",
       pubLink: "https://doi.org/10.1136/tc-2026-060077",
+      pubMedLink: "https://pubmed.ncbi.nlm.nih.gov/42425894/",
       contact: "rachelfung@missouri.edu"
     }
   ];
@@ -69,9 +73,19 @@ export default function App() {
     return 0; // Default array order
   });
 
-  // Fixed slot order: Publication (col 1), GitHub Repo (col 2), Data Repo (col 3).
+  // Button layout configuration columns: 
+  // Column 1: Stacked Publication Links (DOI Link on top, PubMed below)
+  // Column 2: GitHub Repo
+  // Column 3: Data Repo
   const buttonSlots = [
-    { key: 'pubLink', label: 'Publication', variant: 'primary' },
+    { 
+      key: 'pubLinksStack', 
+      isStack: true,
+      slots: [
+        { key: 'pubLink', label: 'DOI Link', variant: 'primary' },
+        { key: 'pubMedLink', label: 'PubMed', variant: 'primary' }
+      ]
+    },
     { key: 'repoLink', label: 'GitHub Repo', variant: 'secondary' },
     { key: 'dataRepoLink', label: 'Data Repo', variant: 'secondary' }
   ];
@@ -231,36 +245,69 @@ export default function App() {
                   Contact: <a href={`mailto:${pub.contact}`} style={{ color: 'var(--accent)', textDecoration: 'none' }}>{pub.contact}</a>
                 </span>
 
-                {/* Right Side: 3 fixed-width slots */}
+                {/* Right Side: 3 fixed-width slots grid */}
                 <div style={{
                   display: 'grid',
                   gridTemplateColumns: 'repeat(3, minmax(110px, 150px))',
-                  gap: '10px'
+                  gap: '10px',
+                  alignItems: 'start'
                 }}>
-                  {buttonSlots.map(slot => {
-                    const url = pub[slot.key];
-                    if (url) {
+                  {buttonSlots.map((slot, sIdx) => {
+                    if (slot.isStack) {
                       return (
-                        <a
+                        <div key={sIdx} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                          {slot.slots.map(subSlot => {
+                            const url = pub[subSlot.key];
+                            if (url) {
+                              return (
+                                <a
+                                  key={subSlot.key}
+                                  href={url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  style={subSlot.variant === 'primary' ? primaryStyle : secondaryStyle}
+                                >
+                                  {subSlot.label}
+                                </a>
+                              );
+                            }
+                            return (
+                              <div
+                                key={subSlot.key}
+                                aria-hidden="true"
+                                style={{ ...buttonBaseStyle, visibility: 'hidden', pointerEvents: 'none' }}
+                              >
+                                {subSlot.label}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      );
+                    } else {
+                      const url = pub[slot.key];
+                      if (url) {
+                        return (
+                          <a
+                            key={slot.key}
+                            href={url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={slot.variant === 'primary' ? primaryStyle : secondaryStyle}
+                          >
+                            {slot.label}
+                          </a>
+                        );
+                      }
+                      return (
+                        <div
                           key={slot.key}
-                          href={url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          style={slot.variant === 'primary' ? primaryStyle : secondaryStyle}
+                          aria-hidden="true"
+                          style={{ ...buttonBaseStyle, visibility: 'hidden', pointerEvents: 'none' }}
                         >
                           {slot.label}
-                        </a>
+                        </div>
                       );
                     }
-                    return (
-                      <div
-                        key={slot.key}
-                        aria-hidden="true"
-                        style={{ ...buttonBaseStyle, visibility: 'hidden', pointerEvents: 'none' }}
-                      >
-                        {slot.label}
-                      </div>
-                    );
                   })}
                 </div>
               </div>
