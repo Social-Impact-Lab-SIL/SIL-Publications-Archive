@@ -37,7 +37,7 @@ export default function App() {
       date: "07/08/2026",
       abstract: "An empirical examination of cigar tax standardisation frameworks, pricing behavior, and cross-market substitution effects.",
       repoLink: "https://github.com/Social-Impact-Lab-SIL/CigarTaxStandardisation",
-      dataRepoLink: "https://social-impact-lab-sil.github.io/SIL-Data-Repository/Population-Exposure-Standardized-Tobacco/",
+      // dataRepoLink omitted      
       pubLink: "https://doi.org/10.1136/tc-2026-060077",
       pubMedLink: "https://pubmed.ncbi.nlm.nih.gov/42425894/",
       contact: "rachelfung@missouri.edu"
