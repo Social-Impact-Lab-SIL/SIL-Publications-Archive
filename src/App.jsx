@@ -15,7 +15,7 @@ export default function App() {
       repoLink: "https://github.com/Social-Impact-Lab-SIL/SpecialtyTobaccoDatabase",
       dataRepoLink: "https://social-impact-lab-sil.github.io/SIL-Data-Repository/Population-Exposure-Standardized-Tobacco/",
       pubLink: "https://doi.org/10.1136/tc-2026-060085",
-      pubMedLink: "https://pubmed.ncbi.nlm.nih.gov/42425894/",
+      pubMedLink: "https://pubmed.ncbi.nlm.nih.gov/42552112/",
       contact: "clowenstein@missouri.edu"
     },
     {
