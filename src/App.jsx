@@ -6,6 +6,7 @@ export default function App() {
   const [sortBy, setSortBy] = useState('default'); // 'default', 'date', 'title', 'author'
 
   const publications = [
+    // Peer-Reviewed Publications
     {
       title: "Patterns of Specialty Tobacco Retail Locations and Visitor Counts in the United States",
       authors: "Austin Landini, Christopher Lowenstein, and Michael F. Pesko",
@@ -24,8 +25,6 @@ export default function App() {
       status: "Published in Addiction",
       date: "07/01/2026",
       abstract: "An evaluation of policy standards and methodological tracking regarding modern tobacco and substance use controls.",
-      // repoLink omitted
-      // dataRepoLink omitted
       pubLink: "https://doi.org/10.1111/add.70531",
       pubMedLink: "https://pubmed.ncbi.nlm.nih.gov/", 
       contact: "ltonti@missouri.edu"
@@ -41,6 +40,70 @@ export default function App() {
       pubLink: "https://doi.org/10.1136/tc-2026-060077",
       pubMedLink: "https://pubmed.ncbi.nlm.nih.gov/42425894/",
       contact: "rachelfung@missouri.edu"
+    },
+    // Working Papers
+    {
+      title: "Cigarette Taxes and the Household Budget",
+      authors: "Michael E. Darden, Reginald B. Hebert, Michael F. Pesko, and Samuel Sturm",
+      status: "Working",
+      date: "2025-01-01",
+      abstract: "An empirical evaluation of how cigarette taxes impact household budgets across varying demographic groups.",
+      pubLink: "https://www.nber.org/papers/w33746",
+      contact: "michaeldarden@jhu.edu"
+    },
+    {
+      title: "Pharmaceutical Drug Regulation and Mortality: Evidence from E-cigarettes",
+      authors: "Michael Pesko and Christian Saenz",
+      status: "Working",
+      date: "2025-01-01",
+      abstract: "An examination of how pharmaceutical drug regulations and e-cigarette availability influence mortality rates.",
+      pubLink: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5108105",
+      contact: "christian.saenz@yale.edu"
+    },
+    {
+      title: "Automation and Diverging Health Risks",
+      authors: "Ricardo B. Ang III, Giseong Kim, Soojin Kim, and Michael F. Pesko",
+      status: "Working",
+      date: "2025-01-01",
+      abstract: "Analyzing how technological automation trends contribute to diverging health risks and behavioral outcomes.",
+      pubLink: "https://ideas.repec.org/p/umc/wpaper/2508.html",
+      contact: "rang@tulane.edu"
+    },
+    {
+      title: "Early Cigarette Prohibition During War and Peace",
+      authors: "Rachel Y. L. Fung, Lauren Hoehn-Velasco, and Michael F. Pesko",
+      status: "Working",
+      date: "2025-01-01",
+      abstract: "Historical analysis of cigarette prohibitions implemented during wartime versus peacetime periods.",
+      pubLink: "https://ideas.repec.org/p/umc/wpaper/2513.html",
+      contact: "rachelfung@missouri.edu"
+    },
+    {
+      title: "Restricting Sales of Flavored Nicotine Vaping Products: Effects on Cigarette and Nicotine Vaping Product Sales in Canada",
+      authors: "Brad Davis, Abigail Friedman, and Michael F. Pesko",
+      status: "Working",
+      date: "2025-01-01",
+      abstract: "Evaluating market responses and substitution patterns following provincial flavored nicotine vaping restrictions in Canada.",
+      pubLink: "https://papers.ssrn.com",
+      contact: "badhhh@missouri.edu"
+    },
+    {
+      title: "Estimating the Effect of E-Cigarette Nicotine Limits on Cigarette and E-Cigarette Sales in Canada",
+      authors: "Brad Davis, Abigail Friedman, and Michael F. Pesko",
+      status: "Working",
+      date: "2025-01-01",
+      abstract: "Assessing the causal impact of federal e-cigarette nicotine concentration limits on tobacco product sales across Canada.",
+      pubLink: "https://papers.ssrn.com",
+      contact: "badhhh@missouri.edu"
+    },
+    {
+      title: "The Effect of Paid Sick Leave on Healthcare Expenditures",
+      authors: "Reginald Hebert, Kevin Callison, Michael Pesko, and Samuel Sturm",
+      status: "Working",
+      date: "2025-01-01",
+      abstract: "Investigating how mandated or offered paid sick leave impacts overall healthcare utilization and expenditures.",
+      pubLink: "https://papers.ssrn.com",
+      contact: "reginald.hebert@yale.edu"
     }
   ];
 
@@ -83,7 +146,7 @@ export default function App() {
       key: 'pubLinksStack', 
       isStack: true,
       slots: [
-        { key: 'pubLink', label: 'DOI Link', variant: 'primary' },
+        { key: 'pubLink', label: 'DOI / Repo Link', variant: 'primary' },
         { key: 'pubMedLink', label: 'PubMed', variant: 'primary' }
       ]
     },
@@ -122,7 +185,7 @@ export default function App() {
       <div style={{ marginBottom: '32px', borderBottom: '1px solid var(--border)', paddingBottom: '20px' }}>
         <h1>Research & Manuscript Archive</h1>
         <p style={{ color: 'var(--text)', marginTop: '8px', fontSize: '16px' }}>
-          Explore code repositories, data documentation, and interactive dashboards for completed and ongoing research by the Social Impact Lab.
+          Explore code repositories, data documentation, working papers, and interactive dashboards for completed and ongoing research by the Social Impact Lab.
         </p>
       </div>
 
@@ -159,8 +222,8 @@ export default function App() {
           }}
         >
           <option value="All">All Statuses</option>
-          <option value="Forthcoming">Forthcoming / Published</option>
-          <option value="Under Review">Under Review</option>
+          <option value="Published">Published</option>
+          <option value="Working">Working</option>
         </select>
         <select
           value={sortBy}
@@ -219,7 +282,7 @@ export default function App() {
                     {pub.status}
                   </span>
                 </p>
-                {pub.date && (
+                {pub.date && pub.status !== 'Working' && (
                   <p style={{ fontSize: '14px', margin: 0, color: 'var(--text)' }}>
                     <strong>Date:</strong> {pub.date}
                   </p>
