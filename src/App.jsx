@@ -12,7 +12,7 @@ export default function App() {
       authors: "Austin Landini, Christopher Lowenstein, and Michael F. Pesko",
       status: "Published in Tobacco Control",
       date: "08/03/2026",
-      abstract: "An analysis of spatial spillovers, demographic transitions, and retail cluster patterns surrounding specialty tobacco locations across the United States.",
+      abstract: "An analysis of specialty tobacco retailer locations, visitor counts and demographic correlates in the United States.",
       repoLink: "https://github.com/Social-Impact-Lab-SIL/SpecialtyTobaccoDatabase",
       dataRepoLink: "https://social-impact-lab-sil.github.io/SIL-Data-Repository/Population-Exposure-Standardized-Tobacco/",
       pubLink: "https://doi.org/10.1136/tc-2026-060085",
