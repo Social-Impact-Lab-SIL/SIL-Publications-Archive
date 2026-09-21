@@ -4,6 +4,7 @@ export default function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('All');
   const [sortBy, setSortBy] = useState('default'); // 'default', 'date', 'title', 'author'
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const publications = [
     // Peer-Reviewed Publications
@@ -140,10 +141,6 @@ export default function App() {
     return 0; // Default array order
   });
 
-  // Button layout configuration columns: 
-  // Column 1: Stacked Publication Links (DOI Link on top, PubMed below)
-  // Column 2: GitHub Repo
-  // Column 3: Data Repo
   const buttonSlots = [
     { 
       key: 'pubLinksStack', 
@@ -185,15 +182,57 @@ export default function App() {
   return (
     <div style={{ padding: '40px 24px', textAlign: 'left', width: '100%', boxSizing: 'border-box' }}>
       
-      {/* Dropdown Navigation Menu */}
-      <div className="sil-nav">
-        <div className="dropdown">
-          <button className="dropbtn">📁 SIL Navigation ▾</button>
-          <div className="dropdown-content">
-            <a href="https://github.com/Social-Impact-Lab" target="_blank" rel="noopener noreferrer">🏢 Social Impact Lab GitHub Org</a>
-            <a href="https://social-impact-lab-sil.github.io/SIL-Data-Repository/" target="_blank" rel="noopener noreferrer">🏠 Data Repository Main Page</a>
+      {/* Dropdown Navigation Menu with reliable React state hover/click behavior */}
+      <div style={{ marginBottom: '24px', position: 'relative', display: 'inline-block' }}
+           onMouseEnter={() => setIsDropdownOpen(true)}
+           onMouseLeave={() => setIsDropdownOpen(false)}>
+        <button style={{
+          backgroundColor: 'var(--accent-bg, #f1f8ff)',
+          color: 'var(--accent, #0366d6)',
+          padding: '8px 16px',
+          fontSize: '14px',
+          fontWeight: '600',
+          border: '1px solid var(--border, #c8e1ff)',
+          borderRadius: '6px',
+          cursor: 'pointer',
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '6px'
+        }}>
+          📁 SIL Navigation ▾
+        </button>
+        {isDropdownOpen && (
+          <div style={{
+            position: 'absolute',
+            left: 0,
+            top: '100%',
+            backgroundColor: 'var(--bg, #ffffff)',
+            minWidth: '260px',
+            boxShadow: '0 8px 24px rgba(149, 157, 165, 0.2)',
+            border: '1px solid var(--border, #e1e4e8)',
+            borderRadius: '6px',
+            zIndex: 1000,
+            marginTop: '4px',
+            overflow: 'hidden',
+            textAlign: 'left'
+          }}>
+            <a href="https://github.com/Social-Impact-Lab" target="_blank" rel="noopener noreferrer" style={{
+              color: 'var(--text-h, #24292e)',
+              padding: '10px 16px',
+              textDecoration: 'none',
+              display: 'block',
+              fontSize: '14px',
+              borderBottom: '1px solid var(--border, #eaecef)'
+            }}>🏢 Social Impact Lab GitHub Org</a>
+            <a href="https://social-impact-lab-sil.github.io/SIL-Data-Repository/" target="_blank" rel="noopener noreferrer" style={{
+              color: 'var(--text-h, #24292e)',
+              padding: '10px 16px',
+              textDecoration: 'none',
+              display: 'block',
+              fontSize: '14px'
+            }}>🏠 Data Repository Main Page</a>
           </div>
-        </div>
+        )}
       </div>
 
       {/* Header */}
