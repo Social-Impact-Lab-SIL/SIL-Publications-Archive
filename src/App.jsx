@@ -184,6 +184,18 @@ export default function App() {
 
   return (
     <div style={{ padding: '40px 24px', textAlign: 'left', width: '100%', boxSizing: 'border-box' }}>
+      
+      {/* Dropdown Navigation Menu */}
+      <div className="sil-nav">
+        <div className="dropdown">
+          <button className="dropbtn">📁 SIL Navigation ▾</button>
+          <div className="dropdown-content">
+            <a href="https://github.com/Social-Impact-Lab" target="_blank" rel="noopener noreferrer">🏢 Social Impact Lab GitHub Org</a>
+            <a href="https://social-impact-lab-sil.github.io/SIL-Data-Repository/" target="_blank" rel="noopener noreferrer">🏠 Data Repository Main Page</a>
+          </div>
+        </div>
+      </div>
+
       {/* Header */}
       <div style={{ marginBottom: '32px', borderBottom: '1px solid var(--border)', paddingBottom: '20px' }}>
         <h1>Research & Manuscript Archive</h1>
