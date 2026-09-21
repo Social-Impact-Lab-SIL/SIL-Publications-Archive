@@ -242,7 +242,21 @@ export default function App() {
                 borderBottom: '1px solid var(--border, #eaecef)'
               }}
             >
-              🏢 Social Impact Lab GitHub Org
+              🌐 SIL Landing Page
+            </a>
+            <a 
+              href="./" 
+              onClick={() => setIsDropdownOpen(false)}
+              style={{
+                color: 'var(--text-h, #24292e)',
+                padding: '10px 16px',
+                textDecoration: 'none',
+                display: 'block',
+                fontSize: '14px',
+                borderBottom: '1px solid var(--border, #eaecef)'
+              }}
+            >
+              📚 Publications Archive
             </a>
             <a 
               href="https://social-impact-lab-sil.github.io/SIL-Data-Repository/" 
@@ -254,10 +268,24 @@ export default function App() {
                 padding: '10px 16px',
                 textDecoration: 'none',
                 display: 'block',
+                fontSize: '14px',
+                borderBottom: '1px solid var(--border, #eaecef)'
+              }}
+            >
+              🏠 Data Repository
+            </a>
+            <a 
+              href="./lab-dashboard" 
+              onClick={() => setIsDropdownOpen(false)}
+              style={{
+                color: 'var(--text-h, #24292e)',
+                padding: '10px 16px',
+                textDecoration: 'none',
+                display: 'block',
                 fontSize: '14px'
               }}
             >
-              🏠 Data Repository Main Page
+              📊 Lab Dashboard
             </a>
           </div>
         )}
@@ -292,7 +320,7 @@ export default function App() {
         />
         <select
           value={statusFilter}
-          onChange={(e) => setStatusFilter(e.target.value)}
+          onChange={(e) => setSearchFilter(e.target.value)}
           style={{
             padding: '12px 16px',
             border: '1px solid var(--border)',
