@@ -1,10 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('All');
   const [sortBy, setSortBy] = useState('default'); // 'default', 'date', 'title', 'author'
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  // Close dropdown if clicking outside of it
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event.target.closest('#sil-nav-container')) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, []);
 
   const publications = [
     // Peer-Reviewed Publications
@@ -182,24 +193,25 @@ export default function App() {
   return (
     <div style={{ padding: '40px 24px', textAlign: 'left', width: '100%', boxSizing: 'border-box' }}>
       
-      {/* Dropdown Navigation Menu with correct GitHub organization URL */}
-      <div style={{ marginBottom: '24px', position: 'relative', display: 'inline-block' }}
-           onMouseEnter={() => setIsDropdownOpen(true)}
-           onMouseLeave={() => setIsDropdownOpen(false)}>
-        <button style={{
-          backgroundColor: 'var(--accent-bg, #f1f8ff)',
-          color: 'var(--accent, #0366d6)',
-          padding: '8px 16px',
-          fontSize: '14px',
-          fontWeight: '600',
-          border: '1px solid var(--border, #c8e1ff)',
-          borderRadius: '6px',
-          cursor: 'pointer',
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: '6px'
-        }}>
-          📁 SIL Navigation ▾
+      {/* Click-to-Toggle Dropdown Navigation Menu */}
+      <div id="sil-nav-container" style={{ marginBottom: '24px', position: 'relative', display: 'inline-block' }}>
+        <button 
+          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+          style={{
+            backgroundColor: 'var(--accent-bg, #f1f8ff)',
+            color: 'var(--accent, #0366d6)',
+            padding: '8px 16px',
+            fontSize: '14px',
+            fontWeight: '600',
+            border: '1px solid var(--border, #c8e1ff)',
+            borderRadius: '6px',
+            cursor: 'pointer',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px'
+          }}
+        >
+          📁 SIL Navigation {isDropdownOpen ? '▴' : '▾'}
         </button>
         {isDropdownOpen && (
           <div style={{
@@ -216,21 +228,37 @@ export default function App() {
             overflow: 'hidden',
             textAlign: 'left'
           }}>
-            <a href="https://github.com/Social-Impact-Lab-SIL" target="_blank" rel="noopener noreferrer" style={{
-              color: 'var(--text-h, #24292e)',
-              padding: '10px 16px',
-              textDecoration: 'none',
-              display: 'block',
-              fontSize: '14px',
-              borderBottom: '1px solid var(--border, #eaecef)'
-            }}>🏢 Social Impact Lab GitHub Org</a>
-            <a href="https://social-impact-lab-sil.github.io/SIL-Data-Repository/" target="_blank" rel="noopener noreferrer" style={{
-              color: 'var(--text-h, #24292e)',
-              padding: '10px 16px',
-              textDecoration: 'none',
-              display: 'block',
-              fontSize: '14px'
-            }}>🏠 Data Repository Main Page</a>
+            <a 
+              href="https://github.com/Social-Impact-Lab-SIL" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              onClick={() => setIsDropdownOpen(false)}
+              style={{
+                color: 'var(--text-h, #24292e)',
+                padding: '10px 16px',
+                textDecoration: 'none',
+                display: 'block',
+                fontSize: '14px',
+                borderBottom: '1px solid var(--border, #eaecef)'
+              }}
+            >
+              🏢 Social Impact Lab GitHub Org
+            </a>
+            <a 
+              href="https://social-impact-lab-sil.github.io/SIL-Data-Repository/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              onClick={() => setIsDropdownOpen(false)}
+              style={{
+                color: 'var(--text-h, #24292e)',
+                padding: '10px 16px',
+                textDecoration: 'none',
+                display: 'block',
+                fontSize: '14px'
+              }}
+            >
+              🏠 Data Repository Main Page
+            </a>
           </div>
         )}
       </div>
