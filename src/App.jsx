@@ -182,7 +182,7 @@ export default function App() {
   return (
     <div style={{ padding: '40px 24px', textAlign: 'left', width: '100%', boxSizing: 'border-box' }}>
       
-      {/* Dropdown Navigation Menu with reliable React state hover/click behavior */}
+      {/* Dropdown Navigation Menu with correct GitHub organization URL */}
       <div style={{ marginBottom: '24px', position: 'relative', display: 'inline-block' }}
            onMouseEnter={() => setIsDropdownOpen(true)}
            onMouseLeave={() => setIsDropdownOpen(false)}>
@@ -216,7 +216,7 @@ export default function App() {
             overflow: 'hidden',
             textAlign: 'left'
           }}>
-            <a href="https://github.com/Social-Impact-Lab" target="_blank" rel="noopener noreferrer" style={{
+            <a href="https://github.com/Social-Impact-Lab-SIL" target="_blank" rel="noopener noreferrer" style={{
               color: 'var(--text-h, #24292e)',
               padding: '10px 16px',
               textDecoration: 'none',
