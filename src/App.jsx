@@ -275,7 +275,7 @@ export default function App() {
               🏠 Data Repository
             </a>
             <a 
-              href="./lab-dashboard" 
+              href="./SIL-Publication-Dashboard/" 
               onClick={() => setIsDropdownOpen(false)}
               style={{
                 color: 'var(--text-h, #24292e)',
