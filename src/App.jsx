@@ -41,12 +41,21 @@ export default function App() {
       pubMedLink: "https://pubmed.ncbi.nlm.nih.gov/42425894/",
       contact: "rachelfung@missouri.edu"
     },
+    {
+      title: "Longitudinal Growth of Mandated Hearing Aid Benefits in the US",
+      authors: "Michelle L. Arnold, Lauren Tonti, Serena Phillips, Stacie P. Kershner, Brandy Lipton, Brianna Heslin, Benjamin Ukert, Austin Landini and Michael F. Pesko",
+      status: "Accepted in JAMA-Otolaryngology",
+      date: "Forthcoming",
+      abstract: "We identify mandated hearing aid coverage under private insurance, Medicaid, and federal direct-service programs and to compare coverage for US youth, adults, and older adults by coverage plan and economic indicators",
+      repoLink: "https://github.com/Social-Impact-Lab-SIL/Longitudinal-Hearing-Aid-Benefits", 
+      dataRepoLink: "https://social-impact-lab-sil.github.io/SIL-Data-Repository/Hearing-Healthcare-Policy/", 
+      contact: "ltonti@missouri.edu"
+    },
     // Working Papers
     {
       title: "Cigarette Taxes and the Household Budget",
       authors: "Michael E. Darden, Reginald B. Hebert, Michael F. Pesko, and Samuel Sturm",
       status: "Working",
-      date: "2025-01-01",
       abstract: "An empirical evaluation of how cigarette taxes impact household budgets across varying demographic groups.",
       pubLink: "https://www.nber.org/papers/w33746",
       contact: "michaeldarden@jhu.edu"
@@ -55,7 +64,6 @@ export default function App() {
       title: "Pharmaceutical Drug Regulation and Mortality: Evidence from E-cigarettes",
       authors: "Michael Pesko and Christian Saenz",
       status: "Working",
-      date: "2025-01-01",
       abstract: "An examination of how pharmaceutical drug regulations and e-cigarette availability influence mortality rates.",
       pubLink: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5108105",
       contact: "christian.saenz@yale.edu"
@@ -64,7 +72,6 @@ export default function App() {
       title: "Automation and Diverging Health Risks",
       authors: "Ricardo B. Ang III, Giseong Kim, Soojin Kim, and Michael F. Pesko",
       status: "Working",
-      date: "2025-01-01",
       abstract: "Analyzing how technological automation trends contribute to diverging health risks and behavioral outcomes.",
       pubLink: "https://ideas.repec.org/p/umc/wpaper/2508.html",
       contact: "rang@tulane.edu"
@@ -73,7 +80,6 @@ export default function App() {
       title: "Early Cigarette Prohibition During War and Peace",
       authors: "Rachel Y. L. Fung, Lauren Hoehn-Velasco, and Michael F. Pesko",
       status: "Working",
-      date: "2025-01-01",
       abstract: "Historical analysis of cigarette prohibitions implemented during wartime versus peacetime periods.",
       pubLink: "https://ideas.repec.org/p/umc/wpaper/2513.html",
       contact: "rachelfung@missouri.edu"
@@ -82,7 +88,6 @@ export default function App() {
       title: "Restricting Sales of Flavored Nicotine Vaping Products: Effects on Cigarette and Nicotine Vaping Product Sales in Canada",
       authors: "Brad Davis, Abigail Friedman, and Michael F. Pesko",
       status: "Working",
-      date: "2025-01-01",
       abstract: "Evaluating market responses and substitution patterns following provincial flavored nicotine vaping restrictions in Canada.",
       pubLink: "https://papers.ssrn.com",
       contact: "badhhh@missouri.edu"
@@ -91,7 +96,6 @@ export default function App() {
       title: "Estimating the Effect of E-Cigarette Nicotine Limits on Cigarette and E-Cigarette Sales in Canada",
       authors: "Brad Davis, Abigail Friedman, and Michael F. Pesko",
       status: "Working",
-      date: "2025-01-01",
       abstract: "Assessing the causal impact of federal e-cigarette nicotine concentration limits on tobacco product sales across Canada.",
       pubLink: "https://papers.ssrn.com",
       contact: "badhhh@missouri.edu"
@@ -100,7 +104,6 @@ export default function App() {
       title: "The Effect of Paid Sick Leave on Healthcare Expenditures",
       authors: "Reginald Hebert, Kevin Callison, Michael Pesko, and Samuel Sturm",
       status: "Working",
-      date: "2025-01-01",
       abstract: "Investigating how mandated or offered paid sick leave impacts overall healthcare utilization and expenditures.",
       pubLink: "https://papers.ssrn.com",
       contact: "reginald.hebert@yale.edu"
