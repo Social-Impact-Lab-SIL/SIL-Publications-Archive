@@ -275,7 +275,7 @@ export default function App() {
               🏠 Data Repository
             </a>
             <a 
-              href="./SIL-Publication-Dashboard/" 
+              href="https://social-impact-lab-sil.github.io/SIL-Publication-Dashboard/" 
               onClick={() => setIsDropdownOpen(false)}
               style={{
                 color: 'var(--text-h, #24292e)',
