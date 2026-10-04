@@ -366,165 +366,172 @@ export default function App() {
       {/* Publications List */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
         {sortedPubs.length > 0 ? (
-          sortedPubs.map((pub, index) => (
-            <div
-              key={index}
-              style={{
-                background: 'var(--bg)',
-                padding: '24px',
-                borderRadius: '8px',
-                border: '1px solid var(--border)',
-                boxShadow: 'var(--shadow)'
-              }}
-            >
-              <h2>{pub.title}</h2>
+          sortedPubs.map((pub, index) => {
+            const isPublishedOrAccepted = pub.status.toLowerCase().includes('published') || pub.status.toLowerCase().includes('accepted');
 
-              <p style={{ fontSize: '15px', marginBottom: '8px', color: 'var(--text-h)' }}>
-                <strong>Authors:</strong> {pub.authors}
-              </p>
+            return (
+              <div
+                key={index}
+                style={{
+                  background: 'var(--bg)',
+                  padding: '24px',
+                  borderRadius: '8px',
+                  border: '1px solid var(--border)',
+                  boxShadow: 'var(--shadow)'
+                }}
+              >
+                <h2>{pub.title}</h2>
 
-              <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginBottom: '12px', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-                <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
-                  <p style={{ fontSize: '14px', margin: 0 }}>
-                    <strong>Status:</strong>{' '}
-                    <span style={{
-                      display: 'inline-block',
-                      padding: '2px 8px',
-                      background: 'var(--accent-bg)',
-                      color: 'var(--accent)',
-                      borderRadius: '4px',
-                      border: '1px solid var(--accent-border)',
-                      fontSize: '13px',
-                      fontWeight: '500',
-                      marginLeft: '4px'
-                    }}>
-                      {pub.status}
-                    </span>
-                  </p>
-                  {pub.date && pub.status !== 'Working' && (
-                    <p style={{ fontSize: '14px', margin: 0, color: 'var(--text)' }}>
-                      <strong>Date:</strong> {pub.date}
+                <p style={{ fontSize: '15px', marginBottom: '8px', color: 'var(--text-h)' }}>
+                  <strong>Authors:</strong> {pub.authors}
+                </p>
+
+                <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginBottom: isPublishedOrAccepted && expandedAbstracts[index] ? '12px' : '0px', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+                  <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
+                    <p style={{ fontSize: '14px', margin: 0 }}>
+                      <strong>Status:</strong>{' '}
+                      <span style={{
+                        display: 'inline-block',
+                        padding: '2px 8px',
+                        background: 'var(--accent-bg)',
+                        color: 'var(--accent)',
+                        borderRadius: '4px',
+                        border: '1px solid var(--accent-border)',
+                        fontSize: '13px',
+                        fontWeight: '500',
+                        marginLeft: '4px'
+                      }}>
+                        {pub.status}
+                      </span>
                     </p>
+                    {pub.date && pub.status !== 'Working' && (
+                      <p style={{ fontSize: '14px', margin: 0, color: 'var(--text)' }}>
+                        <strong>Date:</strong> {pub.date}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Abstract Toggle Icon Button - Only rendered for Published / Accepted items */}
+                  {isPublishedOrAccepted && (
+                    <button
+                      onClick={() => toggleAbstract(index)}
+                      title={expandedAbstracts[index] ? "Hide Abstract" : "Show Abstract"}
+                      style={{
+                        background: expandedAbstracts[index] ? 'var(--accent-bg)' : 'var(--code-bg)',
+                        color: expandedAbstracts[index] ? 'var(--accent)' : 'var(--text-h)',
+                        border: `1px solid ${expandedAbstracts[index] ? 'var(--accent-border)' : 'var(--border)'}`,
+                        borderRadius: '6px',
+                        padding: '6px 12px',
+                        fontSize: '13px',
+                        fontWeight: '500',
+                        cursor: 'pointer',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        transition: 'all 0.2s ease'
+                      }}
+                    >
+                      <span style={{ fontSize: '15px' }}>📄</span>
+                      <span>{expandedAbstracts[index] ? 'Hide Abstract' : 'Abstract'}</span>
+                      <span style={{ fontSize: '11px', marginLeft: '2px' }}>{expandedAbstracts[index] ? '▴' : '▾'}</span>
+                    </button>
                   )}
                 </div>
 
-                {/* Abstract Toggle Icon Button */}
-                <button
-                  onClick={() => toggleAbstract(index)}
-                  title={expandedAbstracts[index] ? "Hide Abstract" : "Show Abstract"}
-                  style={{
-                    background: expandedAbstracts[index] ? 'var(--accent-bg)' : 'var(--code-bg)',
-                    color: expandedAbstracts[index] ? 'var(--accent)' : 'var(--text-h)',
-                    border: `1px solid ${expandedAbstracts[index] ? 'var(--accent-border)' : 'var(--border)'}`,
-                    borderRadius: '6px',
-                    padding: '6px 12px',
-                    fontSize: '13px',
-                    fontWeight: '500',
-                    cursor: 'pointer',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                    transition: 'all 0.2s ease'
-                  }}
-                >
-                  <span style={{ fontSize: '15px' }}>📄</span>
-                  <span>{expandedAbstracts[index] ? 'Hide Abstract' : 'Abstract'}</span>
-                  <span style={{ fontSize: '11px', marginLeft: '2px' }}>{expandedAbstracts[index] ? '▴' : '▾'}</span>
-                </button>
-              </div>
+                {/* Conditional Abstract Display */}
+                {isPublishedOrAccepted && expandedAbstracts[index] && (
+                  <p style={{ fontSize: '15px', marginBottom: '16px', marginTop: '12px', background: 'var(--code-bg)', padding: '12px', borderRadius: '6px', borderLeft: '3px solid var(--accent)' }}>
+                    {pub.abstract}
+                  </p>
+                )}
 
-              {/* Conditional Abstract Display */}
-              {expandedAbstracts[index] && (
-                <p style={{ fontSize: '15px', marginBottom: '16px', background: 'var(--code-bg)', padding: '12px', borderRadius: '6px', borderLeft: '3px solid var(--accent)' }}>
-                  {pub.abstract}
-                </p>
-              )}
-
-              {/* Footer: contact on the left, button grid pinned on the right */}
-              <div style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                gap: '16px',
-                borderTop: '1px solid var(--border)',
-                paddingTop: '16px'
-              }}>
-
-                {/* Left Side: Contact Information */}
-                <span style={{ fontSize: '14px', color: 'var(--text)' }}>
-                  Contact: <a href={`mailto:${pub.contact}`} style={{ color: 'var(--accent)', textDecoration: 'none' }}>{pub.contact}</a>
-                </span>
-
-                {/* Right Side: 3 fixed-width slots grid */}
+                {/* Footer: contact on the left, button grid pinned on the right */}
                 <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(3, minmax(110px, 150px))',
-                  gap: '10px',
-                  alignItems: 'start'
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: '16px',
+                  borderTop: '1px solid var(--border)',
+                  paddingTop: '16px',
+                  marginTop: '16px'
                 }}>
-                  {buttonSlots.map((slot, sIdx) => {
-                    if (slot.isStack) {
-                      return (
-                        <div key={sIdx} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                          {slot.slots.map(subSlot => {
-                            const url = pub[subSlot.key];
-                            if (url) {
+
+                  {/* Left Side: Contact Information */}
+                  <span style={{ fontSize: '14px', color: 'var(--text)' }}>
+                    Contact: <a href={`mailto:${pub.contact}`} style={{ color: 'var(--accent)', textDecoration: 'none' }}>{pub.contact}</a>
+                  </span>
+
+                  {/* Right Side: 3 fixed-width slots grid */}
+                  <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(3, minmax(110px, 150px))',
+                    gap: '10px',
+                    alignItems: 'start'
+                  }}>
+                    {buttonSlots.map((slot, sIdx) => {
+                      if (slot.isStack) {
+                        return (
+                          <div key={sIdx} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                            {slot.slots.map(subSlot => {
+                              const url = pub[subSlot.key];
+                              if (url) {
+                                return (
+                                  <a
+                                    key={subSlot.key}
+                                    href={url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    style={subSlot.variant === 'primary' ? primaryStyle : secondaryStyle}
+                                  >
+                                    {subSlot.label}
+                                  </a>
+                                );
+                              }
                               return (
-                                <a
+                                <div
                                   key={subSlot.key}
-                                  href={url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  style={subSlot.variant === 'primary' ? primaryStyle : secondaryStyle}
+                                  aria-hidden="true"
+                                  style={{ ...buttonBaseStyle, visibility: 'hidden', pointerEvents: 'none' }}
                                 >
                                   {subSlot.label}
-                                </a>
+                                </div>
                               );
-                            }
-                            return (
-                              <div
-                                key={subSlot.key}
-                                aria-hidden="true"
-                                style={{ ...buttonBaseStyle, visibility: 'hidden', pointerEvents: 'none' }}
-                              >
-                                {subSlot.label}
-                              </div>
-                            );
-                          })}
-                        </div>
-                      );
-                    } else {
-                      const targetKey = slot.checkKey || slot.key;
-                      const url = pub[targetKey];
-                      if (url) {
+                            })}
+                          </div>
+                        );
+                      } else {
+                        const targetKey = slot.checkKey || slot.key;
+                        const url = pub[targetKey];
+                        if (url) {
+                          return (
+                            <a
+                              key={slot.key}
+                              href={url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              style={slot.variant === 'primary' ? primaryStyle : secondaryStyle}
+                            >
+                              {slot.label}
+                            </a>
+                          );
+                        }
                         return (
-                          <a
+                          <div
                             key={slot.key}
-                            href={url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={slot.variant === 'primary' ? primaryStyle : secondaryStyle}
+                            aria-hidden="true"
+                            style={{ ...buttonBaseStyle, visibility: 'hidden', pointerEvents: 'none' }}
                           >
                             {slot.label}
-                          </a>
+                          </div>
                         );
                       }
-                      return (
-                        <div
-                          key={slot.key}
-                          aria-hidden="true"
-                          style={{ ...buttonBaseStyle, visibility: 'hidden', pointerEvents: 'none' }}
-                        >
-                          {slot.label}
-                        </div>
-                      );
-                    }
-                  })}
+                    })}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))
+            );
+          })
         ) : (
           <div style={{ textAlign: 'center', padding: '48px', border: '1px solid var(--border)', borderRadius: '8px' }}>
             <p style={{ color: 'var(--text)' }}>No matching publications found.</p>
