@@ -5,6 +5,7 @@ export default function App() {
   const [statusFilter, setStatusFilter] = useState('All');
   const [sortBy, setSortBy] = useState('default'); // 'default', 'date', 'title', 'author'
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [expandedAbstracts, setExpandedAbstracts] = useState({});
 
   // Close dropdown if clicking outside of it
   useEffect(() => {
@@ -16,6 +17,13 @@ export default function App() {
     document.addEventListener('click', handleClickOutside);
     return () => document.removeEventListener('click', handleClickOutside);
   }, []);
+
+  const toggleAbstract = (index) => {
+    setExpandedAbstracts(prev => ({
+      ...prev,
+      [index]: !prev[index]
+    }));
+  };
 
   const publications = [
     // Peer-Reviewed Publications
@@ -320,7 +328,7 @@ export default function App() {
         />
         <select
           value={statusFilter}
-          onChange={(e) => setSearchFilter(e.target.value)}
+          onChange={(e) => setStatusFilter(e.target.value)}
           style={{
             padding: '12px 16px',
             border: '1px solid var(--border)',
@@ -375,33 +383,62 @@ export default function App() {
                 <strong>Authors:</strong> {pub.authors}
               </p>
 
-              <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginBottom: '12px', flexWrap: 'wrap' }}>
-                <p style={{ fontSize: '14px', margin: 0 }}>
-                  <strong>Status:</strong>{' '}
-                  <span style={{
-                    display: 'inline-block',
-                    padding: '2px 8px',
-                    background: 'var(--accent-bg)',
-                    color: 'var(--accent)',
-                    borderRadius: '4px',
-                    border: '1px solid var(--accent-border)',
+              <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginBottom: '12px', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
+                  <p style={{ fontSize: '14px', margin: 0 }}>
+                    <strong>Status:</strong>{' '}
+                    <span style={{
+                      display: 'inline-block',
+                      padding: '2px 8px',
+                      background: 'var(--accent-bg)',
+                      color: 'var(--accent)',
+                      borderRadius: '4px',
+                      border: '1px solid var(--accent-border)',
+                      fontSize: '13px',
+                      fontWeight: '500',
+                      marginLeft: '4px'
+                    }}>
+                      {pub.status}
+                    </span>
+                  </p>
+                  {pub.date && pub.status !== 'Working' && (
+                    <p style={{ fontSize: '14px', margin: 0, color: 'var(--text)' }}>
+                      <strong>Date:</strong> {pub.date}
+                    </p>
+                  )}
+                </div>
+
+                {/* Abstract Toggle Icon Button */}
+                <button
+                  onClick={() => toggleAbstract(index)}
+                  title={expandedAbstracts[index] ? "Hide Abstract" : "Show Abstract"}
+                  style={{
+                    background: expandedAbstracts[index] ? 'var(--accent-bg)' : 'var(--code-bg)',
+                    color: expandedAbstracts[index] ? 'var(--accent)' : 'var(--text-h)',
+                    border: `1px solid ${expandedAbstracts[index] ? 'var(--accent-border)' : 'var(--border)'}`,
+                    borderRadius: '6px',
+                    padding: '6px 12px',
                     fontSize: '13px',
                     fontWeight: '500',
-                    marginLeft: '4px'
-                  }}>
-                    {pub.status}
-                  </span>
-                </p>
-                {pub.date && pub.status !== 'Working' && (
-                  <p style={{ fontSize: '14px', margin: 0, color: 'var(--text)' }}>
-                    <strong>Date:</strong> {pub.date}
-                  </p>
-                )}
+                    cursor: 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    transition: 'all 0.2s ease'
+                  }}
+                >
+                  <span style={{ fontSize: '15px' }}>📄</span>
+                  <span>{expandedAbstracts[index] ? 'Hide Abstract' : 'Abstract'}</span>
+                  <span style={{ fontSize: '11px', marginLeft: '2px' }}>{expandedAbstracts[index] ? '▴' : '▾'}</span>
+                </button>
               </div>
 
-              <p style={{ fontSize: '15px', marginBottom: '16px', background: 'var(--code-bg)', padding: '12px', borderRadius: '6px' }}>
-                {pub.abstract}
-              </p>
+              {/* Conditional Abstract Display */}
+              {expandedAbstracts[index] && (
+                <p style={{ fontSize: '15px', marginBottom: '16px', background: 'var(--code-bg)', padding: '12px', borderRadius: '6px', borderLeft: '3px solid var(--accent)' }}>
+                  {pub.abstract}
+                </p>
+              )}
 
               {/* Footer: contact on the left, button grid pinned on the right */}
               <div style={{
