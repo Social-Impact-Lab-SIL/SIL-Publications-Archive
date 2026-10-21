@@ -82,7 +82,7 @@ export default function App() {
     },
     {
       title: "Pharmaceutical Drug Regulation and Mortality: Evidence from E-cigarettes",
-      authors: "Michael Pesko and Christian Saenz",
+      authors: "Michael F. Pesko and Christian Saenz",
       status: "Working",
       abstract: "An examination of how pharmaceutical drug regulations and e-cigarette availability influence mortality rates.",
       pubLink: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5108105",
@@ -122,7 +122,7 @@ export default function App() {
     },
     {
       title: "The Effect of Paid Sick Leave on Healthcare Expenditures",
-      authors: "Reginald Hebert, Kevin Callison, Michael Pesko, and Samuel Sturm",
+      authors: "Reginald Hebert, Kevin Callison, Michael F. Pesko, and Samuel Sturm",
       status: "Working",
       abstract: "Investigating how mandated or offered paid sick leave impacts overall healthcare utilization and expenditures.",
       pubLink: "https://papers.ssrn.com",
@@ -130,7 +130,7 @@ export default function App() {
     },
     {
       title: "State Paid Sick Leave Mandates and Timeliness of Systemic Treatment Initiation Among Patients with Advanced and Metastatic Solid Tumors",
-      authors: "Serena Phillips, Michael Pesko",
+      authors: "Serena Phillips, Kevin Callison, Julie Ann Sosa, Guthrie Scoblic, Victoria Blinder, Michael F. Pesko",
       status: "Working",
       abstract: "This project examines whether state level paid sick leave (PSL) mandates affected timeliness of first line systemic therapy initiation among patients newly diagnosed with advanced or metastatic solid tumors. It uses deidentified electronic health record-derived cancer patient data from ten solid tumor cohorts from the Flatiron Health Research Database.",
       pubLink: "https://papers.ssrn.com",
@@ -232,6 +232,22 @@ export default function App() {
             textAlign: 'left'
           }}>
             <a 
+              href="https://social-impact-lab-sil.github.io" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              onClick={() => setIsDropdownOpen(false)}
+              style={{
+                color: 'var(--text-h, #24292e)',
+                padding: '10px 16px',
+                textDecoration: 'none',
+                display: 'block',
+                fontSize: '14px',
+                borderBottom: '1px solid var(--border, #eaecef)'
+              }}
+            >
+              🏠 SIL Homepage
+            </a>
+            <a 
               href="https://github.com/Social-Impact-Lab-SIL" 
               target="_blank" 
               rel="noopener noreferrer" 
@@ -245,7 +261,7 @@ export default function App() {
                 borderBottom: '1px solid var(--border, #eaecef)'
               }}
             >
-              🌐 SIL Landing Page
+              🌐 SIL GitHub
             </a>
             <a 
               href="./" 
