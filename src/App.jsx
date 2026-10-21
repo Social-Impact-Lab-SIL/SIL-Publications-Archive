@@ -298,7 +298,7 @@ export default function App() {
 
       {/* Header */}
       <div style={{ marginBottom: '32px', borderBottom: '1px solid var(--border)', paddingBottom: '20px' }}>
-        <h1>Research & Manuscript Archive</h1>
+        <h1>SIL Publications Archive</h1>
         <p style={{ color: 'var(--text)', marginTop: '8px', fontSize: '16px' }}>
           Explore code repositories, data documentation, working papers, and interactive dashboards for completed and ongoing research by the Social Impact Lab.
         </p>
