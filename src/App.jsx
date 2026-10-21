@@ -54,7 +54,7 @@ export default function App() {
       authors: "Guthrie Scoblic, Rachel Y L Fung, Abigail S Friedman, and Michael F. Pesko",
       status: "Published in Tobacco Control",
       date: "07/08/2026",
-      abstract: "We create and publicly release a database of quarterly state and local cigar taxes from 2010 to 2024, standardised to per unit rates by cigar type. Matching Universal Product Code (UPC)-level cigar sales data from the NielsenIQ Retail Scanner Dataset to state and local tax rates by product type, we develop a method to translate heterogeneous cigar tax structures into standardised per unit equivalent tax rates for little, large and premium cigars over time.",
+      abstract: "Background: State cigar taxes in the USA vary widely in structure and level, unlike cigarette taxes which are typically levied uniformly per pack. This complexity has limited the comparability of cigar tax levels across states, products and time and relative to other tobacco products. Methods: We create and publicly release a database of quarterly state and local cigar taxes from 2010 to 2024, standardised to per unit rates by cigar type. Matching Universal Product Code (UPC)-level cigar sales data from the NielsenIQ Retail Scanner Dataset to state and local tax rates by product type, we develop a method to translate heterogeneous cigar tax structures into standardized per unit equivalent tax rates for little, large and premium cigars over time. Results: As of 1 October 2024, average state-level per unit cigar taxes were US$0.06 for little cigars, US$0.14 for large cigars and US$0.24 for premium cigars, reflecting increases of 31.2%, 19.2% and 8.3%, respectively since 1 October 2010. On a per gram basis, average state taxes range from 77.8% of the cigarette tax for little cigars to 22.9% of the cigarette tax for premium cigars. Conclusions: By facilitating more accurate measurement of cigar taxation, the database presented here enables critical policy evaluations and tobacco control research.",
       repoLink: "https://github.com/Social-Impact-Lab-SIL/CigarTaxStandardisation",
       dataRepoLink: "https://social-impact-lab-sil.github.io/SIL-Data-Repository/Population-Exposure-Standardized-Tobacco/",   
       pubLink: "https://doi.org/10.1136/tc-2026-060077",
@@ -127,6 +127,14 @@ export default function App() {
       abstract: "Investigating how mandated or offered paid sick leave impacts overall healthcare utilization and expenditures.",
       pubLink: "https://papers.ssrn.com",
       contact: "reginald.hebert@yale.edu"
+    },
+    {
+      title: "State Paid Sick Leave Mandates and Timeliness of Systemic Treatment Initiation Among Patients with Advanced and Metastatic Solid Tumors",
+      authors: "Serena Phillips, Michael Pesko",
+      status: "Working",
+      abstract: "This project examines whether state level paid sick leave (PSL) mandates affected timeliness of first line systemic therapy initiation among patients newly diagnosed with advanced or metastatic solid tumors. It uses deidentified electronic health record-derived cancer patient data from ten solid tumor cohorts from the Flatiron Health Research Database.",
+      pubLink: "https://papers.ssrn.com",
+      contact: "sphillips@missouri.edu"
     }
   ];
 
@@ -159,19 +167,6 @@ export default function App() {
     }
     return 0; // Default array order
   });
-
-  const buttonSlots = [
-    { 
-      key: 'pubLinksStack', 
-      isStack: true,
-      slots: [
-        { key: 'pubLink', label: 'DOI / Repo Link', variant: 'primary' },
-        { key: 'pubMedLink', label: 'PubMed', variant: 'primary' }
-      ]
-    },
-    { key: 'repoLink', label: 'GitHub Repo', variant: 'secondary', checkKey: 'repoLink' },
-    { key: 'dataRepoLink', label: 'Data Repo', variant: 'secondary', checkKey: 'dataRepoLink' }
-  ];
 
   const buttonBaseStyle = {
     padding: '8px 10px',
@@ -284,6 +279,8 @@ export default function App() {
             </a>
             <a 
               href="https://social-impact-lab-sil.github.io/SIL-Publication-Dashboard/" 
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setIsDropdownOpen(false)}
               style={{
                 color: 'var(--text-h, #24292e)',
@@ -386,33 +383,34 @@ export default function App() {
                   <strong>Authors:</strong> {pub.authors}
                 </p>
 
-                <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginBottom: isPublishedOrAccepted && expandedAbstracts[index] ? '12px' : '0px', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-                  <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
-                    <p style={{ fontSize: '14px', margin: 0 }}>
-                      <strong>Status:</strong>{' '}
-                      <span style={{
-                        display: 'inline-block',
-                        padding: '2px 8px',
-                        background: 'var(--accent-bg)',
-                        color: 'var(--accent)',
-                        borderRadius: '4px',
-                        border: '1px solid var(--accent-border)',
-                        fontSize: '13px',
-                        fontWeight: '500',
-                        marginLeft: '4px'
-                      }}>
-                        {pub.status}
-                      </span>
+                {/* Status & Date Line */}
+                <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginBottom: '10px', flexWrap: 'wrap' }}>
+                  <p style={{ fontSize: '14px', margin: 0 }}>
+                    <strong>Status:</strong>{' '}
+                    <span style={{
+                      display: 'inline-block',
+                      padding: '2px 8px',
+                      background: 'var(--accent-bg)',
+                      color: 'var(--accent)',
+                      borderRadius: '4px',
+                      border: '1px solid var(--accent-border)',
+                      fontSize: '13px',
+                      fontWeight: '500',
+                      marginLeft: '4px'
+                    }}>
+                      {pub.status}
+                    </span>
+                  </p>
+                  {pub.date && pub.status !== 'Working' && (
+                    <p style={{ fontSize: '14px', margin: 0, color: 'var(--text)' }}>
+                      <strong>Date:</strong> {pub.date}
                     </p>
-                    {pub.date && pub.status !== 'Working' && (
-                      <p style={{ fontSize: '14px', margin: 0, color: 'var(--text)' }}>
-                        <strong>Date:</strong> {pub.date}
-                      </p>
-                    )}
-                  </div>
+                  )}
+                </div>
 
-                  {/* Abstract Toggle Icon Button - Only rendered for Published / Accepted items */}
-                  {isPublishedOrAccepted && (
+                {/* Abstract Toggle Icon Button - Placed on left below status */}
+                {isPublishedOrAccepted && (
+                  <div style={{ marginBottom: '12px' }}>
                     <button
                       onClick={() => toggleAbstract(index)}
                       title={expandedAbstracts[index] ? "Hide Abstract" : "Show Abstract"}
@@ -435,8 +433,8 @@ export default function App() {
                       <span>{expandedAbstracts[index] ? 'Hide Abstract' : 'Abstract'}</span>
                       <span style={{ fontSize: '11px', marginLeft: '2px' }}>{expandedAbstracts[index] ? '▴' : '▾'}</span>
                     </button>
-                  )}
-                </div>
+                  </div>
+                )}
 
                 {/* Conditional Abstract Display */}
                 {isPublishedOrAccepted && expandedAbstracts[index] && (
@@ -445,7 +443,7 @@ export default function App() {
                   </p>
                 )}
 
-                {/* Footer: contact on the left, button grid pinned on the right */}
+                {/* Footer: contact on the left, organized button grid pinned on the right */}
                 <div style={{
                   display: 'flex',
                   flexWrap: 'wrap',
@@ -462,71 +460,46 @@ export default function App() {
                     Contact: <a href={`mailto:${pub.contact}`} style={{ color: 'var(--accent)', textDecoration: 'none' }}>{pub.contact}</a>
                   </span>
 
-                  {/* Right Side: 3 fixed-width slots grid */}
+                  {/* Right Side: Reorganized 2-row button grid */}
                   <div style={{
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(3, minmax(110px, 150px))',
+                    gridTemplateColumns: 'repeat(2, minmax(130px, 160px))',
                     gap: '10px',
                     alignItems: 'start'
                   }}>
-                    {buttonSlots.map((slot, sIdx) => {
-                      if (slot.isStack) {
-                        return (
-                          <div key={sIdx} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                            {slot.slots.map(subSlot => {
-                              const url = pub[subSlot.key];
-                              if (url) {
-                                return (
-                                  <a
-                                    key={subSlot.key}
-                                    href={url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    style={subSlot.variant === 'primary' ? primaryStyle : secondaryStyle}
-                                  >
-                                    {subSlot.label}
-                                  </a>
-                                );
-                              }
-                              return (
-                                <div
-                                  key={subSlot.key}
-                                  aria-hidden="true"
-                                  style={{ ...buttonBaseStyle, visibility: 'hidden', pointerEvents: 'none' }}
-                                >
-                                  {subSlot.label}
-                                </div>
-                              );
-                            })}
-                          </div>
-                        );
-                      } else {
-                        const targetKey = slot.checkKey || slot.key;
-                        const url = pub[targetKey];
-                        if (url) {
-                          return (
-                            <a
-                              key={slot.key}
-                              href={url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              style={slot.variant === 'primary' ? primaryStyle : secondaryStyle}
-                            >
-                              {slot.label}
-                            </a>
-                          );
-                        }
-                        return (
-                          <div
-                            key={slot.key}
-                            aria-hidden="true"
-                            style={{ ...buttonBaseStyle, visibility: 'hidden', pointerEvents: 'none' }}
-                          >
-                            {slot.label}
-                          </div>
-                        );
-                      }
-                    })}
+                    {/* Row 1: DOI Link & PubMed Link */}
+                    {pub.pubLink ? (
+                      <a href={pub.pubLink} target="_blank" rel="noopener noreferrer" style={primaryStyle}>
+                        DOI Link
+                      </a>
+                    ) : (
+                      <div aria-hidden="true" style={{ ...buttonBaseStyle, visibility: 'hidden', pointerEvents: 'none' }}>DOI Link</div>
+                    )}
+
+                    {pub.pubMedLink ? (
+                      <a href={pub.pubMedLink} target="_blank" rel="noopener noreferrer" style={primaryStyle}>
+                        PubMed
+                      </a>
+                    ) : (
+                      <div aria-hidden="true" style={{ ...buttonBaseStyle, visibility: 'hidden', pointerEvents: 'none' }}>PubMed</div>
+                    )}
+
+                    {/* Row 2: GitHub Repo & Data Repo */}
+                    {pub.repoLink ? (
+                      <a href={pub.repoLink} target="_blank" rel="noopener noreferrer" style={secondaryStyle}>
+                        GitHub Repo
+                      </a>
+                    ) : (
+                      <div aria-hidden="true" style={{ ...buttonBaseStyle, visibility: 'hidden', pointerEvents: 'none' }}>GitHub Repo</div>
+                    )}
+
+                    {pub.dataRepoLink ? (
+                      <a href={pub.dataRepoLink} target="_blank" rel="noopener noreferrer" style={secondaryStyle}>
+                        Data Repo
+                      </a>
+                    ) : (
+                      <div aria-hidden="true" style={{ ...buttonBaseStyle, visibility: 'hidden', pointerEvents: 'none' }}>Data Repo</div>
+                    )}
                   </div>
                 </div>
               </div>
