@@ -64,11 +64,13 @@ export default function App() {
     {
       title: "Longitudinal Growth of Mandated Hearing Aid Benefits in the US",
       authors: "Michelle L. Arnold, Lauren Tonti, Serena Phillips, Stacie P. Kershner, Brandy Lipton, Brianna Heslin, Benjamin Ukert, Austin Landini and Michael F. Pesko",
-      status: "Accepted in JAMA-Otolaryngology",
-      date: "Forthcoming",
+      status: "Published in JAMA-Otolaryngology",
+      date: "10/15/2026",
       abstract: "In this cross-sectional study using American Community Survey (ACS) data, mandated coverage rose among youth and working age adults, but declined modestly among adults aged 65 and older. Most households below the federal poverty level lacked guaranteed coverage.",
       repoLink: "https://github.com/Social-Impact-Lab-SIL/Longitudinal-Hearing-Aid-Benefits", 
       dataRepoLink: "https://social-impact-lab-sil.github.io/SIL-Data-Repository/Hearing-Healthcare-Policy/", 
+	pubLink: "https://10.1001/jamaoto.2026.3143",
+	pubMedLink: "https://pubmed.ncbi.nlm.nih.gov/42879131/"
       contact: "ltonti@missouri.edu"
     },
     // Working Papers
