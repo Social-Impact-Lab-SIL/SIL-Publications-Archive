@@ -296,7 +296,7 @@ export default function App() {
               🏠 Data Repository
             </a>
             <a 
-              href="https://social-impact-lab-sil.github.io/SIL-Dashboard-Home/" 
+              href="https://social-impact-lab-sil.github.io/Dashboard-Home/" 
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsDropdownOpen(false)}
@@ -308,7 +308,7 @@ export default function App() {
                 fontSize: '14px'
               }}
             >
-              📊 Lab Dashboard
+              📊 Dashboard Home
             </a>
           </div>
         )}
