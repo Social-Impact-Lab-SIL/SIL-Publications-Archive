@@ -296,7 +296,7 @@ export default function App() {
               🏠 Data Repository
             </a>
             <a 
-              href="https://social-impact-lab-sil.github.io/SIL-Publication-Dashboard/" 
+              href="https://social-impact-lab-sil.github.io/SIL-Dashboard-Home/" 
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsDropdownOpen(false)}
