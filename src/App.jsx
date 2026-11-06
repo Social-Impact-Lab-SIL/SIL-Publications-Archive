@@ -70,7 +70,7 @@ export default function App() {
       repoLink: "https://github.com/Social-Impact-Lab-SIL/Longitudinal-Hearing-Aid-Benefits", 
       dataRepoLink: "https://social-impact-lab-sil.github.io/SIL-Data-Repository/Hearing-Healthcare-Policy/", 
 	pubLink: "https://10.1001/jamaoto.2026.3143",
-	pubMedLink: "https://pubmed.ncbi.nlm.nih.gov/42879131/"
+	pubMedLink: "https://pubmed.ncbi.nlm.nih.gov/42879131/",
       contact: "ltonti@missouri.edu"
     },
     // Working Papers
